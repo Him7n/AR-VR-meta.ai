@@ -41,7 +41,7 @@ const File = () => {
         <>
             <Html occlude={"blending"} transform
                 scale={0.15} rotation-y={-Math.PI / 30}
-                position={[-60, 2, 15]
+                position={[-60, 2.5, 15]
 
                 }
 

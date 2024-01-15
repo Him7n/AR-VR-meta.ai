@@ -1,4 +1,4 @@
-import { OrbitControls, PointerLockControls, useFBO } from '@react-three/drei'
+import { OrbitControls, PointerLockControls, useFBO, useGLTF } from '@react-three/drei'
 import Lights from './Lights.js'
 import { CuboidCollider, Physics, RigidBody } from '@react-three/rapier'
 import { useTexture } from '@react-three/drei'
@@ -36,6 +36,11 @@ THREE.ColorManagement.legacyMode = false;
 
 
 export default function Experience() {
+    //-- test--
+
+    const hamburger = useGLTF("http://localhost:3002/hamburger.glb");
+
+    //---
     const [characters] = useAtom(charactersAtom);
 
     // finding me 
@@ -138,6 +143,7 @@ export default function Experience() {
             {/* <Room /> */}
             <Cinema />
             <TicketBooth />
+            <primitive object={hamburger.scene} scale={1} />
             <TheatreStage />
             <WhiteRoom />
             {/* <Presentationiframe / */}
