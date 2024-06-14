@@ -8,8 +8,16 @@ import { FlyControls, KeyboardControls, Sky } from '@react-three/drei';
 import { PointerLockControls } from '@react-three/drei';
 
 import { Controllers, Hands, XRButton, XR, VRButton, ARButton } from '@react-three/xr';
+import Authorize from '../Component/Authorize.js';
 const Enviroment = () => {
+    const response = Authorize();
+    if(response!= null){
+        console.log("naviagate to signup")
+    }
+    
+
   return (
+
       <KeyboardControls
           map={[
               { name: 'forward', keys: ['ArrowUp', 'KeyW'] },

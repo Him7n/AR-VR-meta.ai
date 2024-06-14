@@ -57,6 +57,35 @@ router.post("/signup", async (req, res) => {
 })
 
 
+router.post('/authorize', async (req,res)=>{
+
+    const word = req.headers.authorization.split(" ");
+    const token  =  word[1];
+    console.log(word);
+try{
+   const response = await jwt.verify(token,JWT_SECRET)
+
+if(response.userId){
+    res.status(200).json({
+        message : "You are authorised"
+    })
+}else{
+    res.status(201).json({
+        message : "you are not authoriesed"
+    })
+}
+}catch(err){
+    res.status(201).json({
+        message : "you are not authoriesed"
+    })
+}
+
+  
+
+
+
+})
+
 const signinBody = zod.object({
     username: zod.string().email(),
 	password: zod.string()
