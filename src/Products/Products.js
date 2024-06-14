@@ -23,10 +23,11 @@ const Products = () => {
       <div className='left-portion'>
         <div className='item-1'  >item 1  </div>
         <div className='item-1' > item 2  </div>
+        <div className='item-1' >  item 3</div>
+        <div className='item-1' > item 4  </div>
 
       </div>
-      <div className='right-portion'> <div className='item-1' >  item 3</div>
-        <div className='item-1' > item 4  </div></div>
+
 
       <XrContainer />
     </div>

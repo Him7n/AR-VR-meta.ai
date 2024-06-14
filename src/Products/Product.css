@@ -13,7 +13,7 @@
   margin-inline: auto;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
 
   gap: 10vw;
   opacity: 0.3;
@@ -45,11 +45,11 @@
   background-color: rgba(47, 54, 255, 0);
   /* position: absolute; */
   color: rgba(0, 0, 0, 0.482);
-  width: 20vw;
-  height: 10vh;
+  width: 15vw;
+  height: 9vh;
   border: 2px solid white;
   border-radius: 15px;
-
+  gap: 1vh;
   z-index: 10;
   display: flex;
   align-items: center;

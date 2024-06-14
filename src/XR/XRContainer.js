@@ -11,12 +11,12 @@ export default function XrContainer() {
 
     return (
         <>
-            <VRButton />
-            <Canvas>
+            <ARButton />
+            <Canvas style={{ width: '300px', height: '200px' }} >
                 <XR>
                     <XrCube />
                 </XR>
-            </Canvas>
+            </Canvas >
         </>
     )
 }
