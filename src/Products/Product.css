@@ -1,0 +1,84 @@
+*{
+    font-family: sans-serif;
+    font-size: 2vw;
+}
+.MainContainer {
+    width: 90vw;
+    height: 50vw;
+    z-index: 10;
+    /* background-color: black; */
+    position: absolute;
+    left: 5%;
+    top:10%;
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    
+ gap: 10vw;
+    opacity: 0.3;
+
+
+}
+
+
+.left-portion{
+    display: flex;
+    flex-direction: column;
+    /* background-color: cyan; */
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+    width: 30vw;
+    height: 40vh;
+
+
+}
+.right-portion{
+    display: flex;
+    flex-direction: column;
+    /* background-color: cyan; */
+    align-items: center;
+    justify-content:space-between;
+    z-index: 10;
+    
+    
+    
+    width: 30vw;
+    height: 40vh;
+
+
+}
+.left-portion > div{
+    background-color: rgba(47, 54, 255, 0.406);
+    /* position: absolute; */
+    width: 20vw;
+    height: 10vh;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.right-portion > div{
+    background-color: rgba(47, 54, 255, 0.406);
+    /* background-color: yellow; */
+/* position: absolute; */
+width: 20vw;
+height: 10vh;
+z-index: 10;
+ display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* .right-portion > div :hover{
+    background-color: rgba(47, 255, 241, 0.52);
+}
+.left-portion > div :hover{
+    background-color: rgba(47, 255, 241, 0.52);
+} */
+
+.left-portion > div:hover,
+.right-portion > div:hover {
+    background-color: rgba(47, 255, 241, 0.52);
+}

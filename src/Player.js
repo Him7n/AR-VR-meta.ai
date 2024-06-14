@@ -1,6 +1,7 @@
 import {  OrbitControls, useGLTF } from '@react-three/drei'
 import { socket,charactersAtom } from './Socketmanager'
 import { useAtom } from 'jotai'
+import { menuAtom } from './Utils/GuildAtom'
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import gsap from 'gsap'
 import { RigidBody } from '@react-three/rapier'
@@ -21,7 +22,7 @@ import { useState } from 'react'
 
 const Player = ({id,position,rotation,delta}) => {
 
-
+const [showmenuAtom,setShowMenuAtom] = useAtom(menuAtom)
 /**
  * 
  * 
@@ -92,18 +93,31 @@ const controlsRef = useRef();
         mesh.castShadow = true;
     });
 
-    const camera = useThree((state)=>state.camera)
+const SmoothDelay = (value)=>{
+    setTimeout(() => {
+        // setShowMenuAtom(showmenu);
+        setShowMenuAtom(value);
+}, 1000);
 
+}
+
+    const camera = useThree((state)=>state.camera)
+showmenu ? SmoothDelay(true) : setShowMenuAtom(false);
     // GSAP working , just working 
     if (showmenu) {
-    
         tl.to(camera.position, {
-           x: 20,
-           y: 1,
-           z: 20,
+           x: 18,
+           y: 3,
+           z: 18,
            ease: "easein",
            
         });
+
+
+        // make a mesh greenwne you cant ahave accessto that yet
+
+
+        
      }
 
 
@@ -152,7 +166,9 @@ return dirOffest;
 */
 // console.log(model.scene);
 useFrame((state,delta)=>{
-    
+   
+    // console.log("ShowmenuyAtom        :" + showmenuAtom)
+
     // body.current.rotation = new THREE.Vector3(0,Math.PI,0);
     // console.log(getkeys());
 

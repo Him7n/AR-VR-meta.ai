@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber'
 import Experience from './Experience.js'
 import { KeyboardControls, Sky } from '@react-three/drei'
 import { PointerLockControls } from '@react-three/drei'
+import Products from './Products/Products.js'
 const root = ReactDOM.createRoot(document.querySelector('#root'))
 
 root.render(
@@ -14,6 +15,7 @@ root.render(
         { name: 'right', keys: ['ArrowRight', 'KeyD'] },
         { name: 'jump', keys: ['Space'] },
     ]} >
+           <Products/>
       <Canvas
         shadows
         camera={ {
@@ -27,5 +29,6 @@ root.render(
 
         <Experience />
     </Canvas>
+ 
     </KeyboardControls>
 )
