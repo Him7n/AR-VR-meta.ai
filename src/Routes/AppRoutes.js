@@ -5,11 +5,15 @@ import { VRButton } from '@react-three/xr';
 import { Canvas } from '@react-three/fiber';
 import Enviroment from '../Pages/Enviroment';
 import ArCube from '../AR/ArCube';
+import { Signin } from '../Pages/Signin';
+import { Signup } from '../Pages/Signup';
 const AppRoutes = () => {
     return (
         <Router>
             <Routes> 
                 <Route element={<Enviroment />} path='/' />
+                <Route path="/signup" element={<Signup />} />
+          <Route path="/signin" element={<Signin />} />
                 {/* <Route element={<ArCube />} path='/xr' /> */}
             </Routes>
         </Router>
