@@ -40,13 +40,14 @@ export default function Experience() {
 
     useFrame(() => {
 
-        // if (isPresenting) {
-        //     player.position.x = character.position[0] + 0.4
-        //     player.position.y = character.position[1] + 1
-        //     player.position.z = character.position[2]
+        if (isPresenting) {
+            player.position.x = character.position[0] + 0.4
+            player.position.y = character.position[1] + 1.2
+            player.position.z = character.position[2]
 
-        //     player.rotation.y = character.rotation
-        // }
+
+            player.rotation.y = character.rotation
+        }
 
     })
     //--
