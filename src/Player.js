@@ -94,6 +94,7 @@ const controlsRef = useRef();
 
     const camera = useThree((state)=>state.camera)
 
+    // GSAP working , just working 
     if (showmenu) {
     
         tl.to(camera.position, {
