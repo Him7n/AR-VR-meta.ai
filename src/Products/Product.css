@@ -4,12 +4,12 @@
 }
 .MainContainer {
   width: 90vw;
-  height: 50vw;
+  height: 40vw;
   z-index: 10;
   /* background-color: black; */
   position: absolute;
   left: 5%;
-  top: 10%;
+  top: 5%;
   margin-inline: auto;
   display: flex;
   align-items: center;

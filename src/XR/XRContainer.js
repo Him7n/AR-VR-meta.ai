@@ -11,7 +11,7 @@ export default function XrContainer() {
 
     return (
         <>
-            <ARButton />
+            <VRButton />
             <Canvas>
                 <XR>
                     <XrCube />
