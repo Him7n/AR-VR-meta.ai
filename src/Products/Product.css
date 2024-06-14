@@ -16,7 +16,7 @@
   justify-content: space-between;
 
   gap: 10vw;
-  opacity: 0.3;
+  opacity: 1;
 }
 
 .left-portion {
@@ -26,7 +26,7 @@
   align-items: center;
   justify-content: space-between;
   z-index: 10;
-  width: 30vw;
+  width: 20vw;
   height: 40vh;
 }
 .right-portion {
@@ -38,7 +38,7 @@
   justify-content: space-between;
   z-index: 10;
 
-  width: 30vw;
+  width: 20vw;
   height: 40vh;
 }
 .left-portion > div {
@@ -47,6 +47,7 @@
   color: rgba(0, 0, 0, 0.482);
   width: 15vw;
   height: 9vh;
+  opacity: 0.3;
   border: 2px solid white;
   border-radius: 15px;
   gap: 1vh;
