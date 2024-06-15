@@ -1,49 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { SocketManager } from '../Socketmanager';
 import { InputBox } from '../Component/InputBox';
 import { Button } from '../Component/Button';
 import { socket } from '../Socketmanager';
 import '../Pages/VoiceChat.css';
-import { Peer } from "peerjs";
+import { Peer } from 'peerjs';
 import { connect } from 'socket.io-client';
 
 const VoiceChat = () => {
     const [joinedRoom, setJoinedRoom] = useState(false);
     const [roomId, setRoomId] = useState('');
-    const myPeer = new Peer();
+    const myPeer = useRef(null);
+    const [mute, setMute] = useState(false);
     const [mystream, setMystream] = useState(null);
-    const [remotestream, setRemoteStream] = useState(null);
+    const videoGridRef = useRef(null);
 
     useEffect(() => {
-        const videoGrid = document.getElementById('video-grid');
-        myPeer.on('open', id => {
-            console.log("Peer joined room: " + id);
+        myPeer.current = new Peer();
+
+        myPeer.current.on('open', id => {
+            console.log('Peer joined room: ' + id);
         });
 
-        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-            .then(stream => {
-                setMystream(stream);
-                const myVideo = document.createElement('video');
-                myVideo.srcObject = stream;
-                // myVideo.muted = true;
-                myVideo.play();
-                videoGrid.appendChild(myVideo);
+        navigator.mediaDevices.getUserMedia({ video: false, audio: true }).then(stream => {
+            setMystream(stream);
+            const myVideo = document.createElement('video');
+            myVideo.srcObject = stream;
+            myVideo.muted = true; // Mute local video by default
+            myVideo.play();
+            videoGridRef.current.appendChild(myVideo);
+            addMuteButton(myVideo); // Add mute button for local video
 
-                myPeer.on('call', call => {
-                    call.answer(stream);
-                    const video = document.createElement('video');
-                    call.on('stream', userVideoStream => {
-                        addVideoStream(video, userVideoStream);
-                    });
+            myPeer.current.on('call', call => {
+                call.answer(stream);
+                const video = document.createElement('video');
+                call.on('stream', userVideoStream => {
+                    addVideoStream(video, userVideoStream);
                 });
-
-                socket.on('user-connected', userId => {
-                    connectToNewUser(userId, stream);
-                });
-            })
-            .catch(error => {
-                console.error('Error accessing webcam:', error);
             });
+
+            socket.on('user-connected', userId => {
+                connectToNewUser(userId, stream);
+            });
+        }).catch(error => {
+            console.error('Error accessing webcam:', error);
+        });
 
         return () => {
             // Cleanup code here if needed
@@ -55,11 +56,12 @@ const VoiceChat = () => {
         video.addEventListener('loadedmetadata', () => {
             video.play();
         });
-        document.getElementById('video-grid').appendChild(video);
+        videoGridRef.current.appendChild(video);
+        addMuteButton(video); // Add mute button for each new video
     }
 
     function connectToNewUser(userId, stream) {
-        const call = myPeer.call(userId, stream);
+        const call = myPeer.current.call(userId, stream);
         const video = document.createElement('video');
         call.on('stream', userVideoStream => {
             addVideoStream(video, userVideoStream);
@@ -67,6 +69,20 @@ const VoiceChat = () => {
         call.on('close', () => {
             // video.remove();
         });
+    }
+
+    function addMuteButton(videoElement) {
+        const muteButton = document.createElement('button');
+        muteButton.innerHTML = 'Mute';
+        muteButton.onclick = () => toggleMute(videoElement);
+        videoElement.parentNode.appendChild(muteButton);
+    }
+
+    function toggleMute(videoElement) {
+        setMute(!mute); // Update mute state
+        videoElement.muted = !videoElement.muted;
+        const muteButton = videoElement.parentNode.querySelector('button');
+        muteButton.innerHTML = videoElement.muted ? 'Unmute' : 'Mute';
     }
 
     const handleCreateRoom = () => {
@@ -81,30 +97,17 @@ const VoiceChat = () => {
 
     return (
         <>
-            <div>VoiceChat</div>
-            <InputBox label="RoomId" value={roomId} onChange={(e) => setRoomId(e.target.value)} placeholder="Room ID" />
+            {/* <div>VoiceChat</div>
+            <InputBox label="RoomId" value={roomId} onChange={e => setRoomId(e.target.value)} placeholder="Room ID" />
             <Button label="Create Room" onClick={handleCreateRoom} />
-            <InputBox label="Join Room" value={roomId} onChange={(e) => setRoomId(e.target.value)} placeholder="Room ID" />
+            <InputBox label="Join Room" value={roomId} onChange={e => setRoomId(e.target.value)} placeholder="Room ID" />
             <Button label="Join Room" onClick={handleJoinRoom} />
             <SocketManager />
 
             {joinedRoom && <h1>Audio Joined</h1>}
-
-            {/* {mystream && (
-                <div>
-                    <h2>Webcam Stream</h2>
-                    <video autoPlay muted style={{ width: '100%', maxWidth: '400px' }} ref={(videoRef) => { if (videoRef) videoRef.srcObject = mystream; }} />
-                </div>
-            )} */}
-
-            {/* {remotestream && (
-                <div>
-                    <h2>Remote Webcam Stream</h2>
-                    <video autoPlay muted style={{ width: '100%', maxWidth: '400px' }} ref={(videoRef) => { if (videoRef) videoRef.srcObject = remotestream; }} />
-                </div>
-            )} */}
-
-            <div id="video-grid"></div>
+{/*  */}
+            {/* <Button onClick={() => toggleMute(mystream)} label={`MuteMyself + ${mute ? 'Muted' : 'Unmuted'}`} /> */}
+            <div id="video-grid" className='bg-slate-600/10 w-[5rem]     flex flex-col absolute top-1/3 z-20 ' ref={videoGridRef}></div>
         </>
     );
 };

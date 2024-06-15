@@ -24,6 +24,7 @@ import Room from './Models/Room.js'
 import WhiteRoom from './Models/WhiteRoom.js'
 import Presentation from './Iframe/Presentationiframe.js'
 import Presentationiframe from './Iframe/Presentationiframe.js'
+import VoiceChat from './Pages/VoiceChat.js'
 THREE.ColorManagement.legacyMode = false;
 
 
@@ -135,6 +136,7 @@ export default function Experience() {
             <Presentationiframe />
             {/* <primitive object={wilow} scale={1} /> */}
             <SocketManager />
+            {/* <VoiceChat/> */}
             {/* <Player2/> */}
         </Physics>
 
