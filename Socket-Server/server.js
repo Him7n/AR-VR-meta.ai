@@ -25,10 +25,14 @@ io.on("connection", (socket) => {
   console.log("User connected: " + socket.id);
 
   // Automatically join a room upon connection
-  sockettoroom.set(socket.id, "   gameRoom");
+  sockettoroom.set(socket.id, "gameRoom");
   // console.log("User joined: " + socket.id + "gameRoom");
-  io.to('gameRoom').emit('joined Room', socket.id);
+  io.to('gameRoom').emit('NewUserJoined', socket.id);
   socket.join('gameRoom');
+  io.to(socket.id).emit('joined Room', socket.id);
+  socket.broadcast.emit('user-connected', socket.id)
+  console.log("sent it back to user");
+  // console.log("User joined: " + socket.id);
   // Add new character to the characters array and emit 'spawn' event to all clients
   characters.push({
     id: socket.id,
@@ -38,14 +42,14 @@ io.on("connection", (socket) => {
     position: generateRandomPosition(),
   });
   io.to('gameRoom').emit("spawn", characters);
-  socket.on("user:call", ({ to, offer }) => {
-    console.log({ to });
+  // socket.on("user:call", ({ to, offer }) => {
+  //   console.log({ to });
 
-    io.to(to).emit("incomming:call", { from: socket.id, offer });
-  });
-  socket.on("call:accepted", ({ to, ans }) => {
-    io.to(to).emit("call:accepted", { from: socket.id, ans });
-  });
+  //   io.to(to).emit("incomming:call", { from: socket.id, offer });
+  // });
+  // socket.on("call:accepted", ({ to, ans }) => {
+  //   io.to(to).emit("call:accepted", { from: socket.id, ans });
+  // });
   // Handle rotation event
   socket.on("rotation", (rotation) => {
     const character = characters.find((character) => character.id === socket.id);
@@ -72,15 +76,15 @@ io.on("connection", (socket) => {
       io.to('gameRoom').emit("spawn", characters);
     }
   });
-  socket.on("peer:nego:needed", ({ to, offer }) => {
-    console.log("peer:nego:needed", offer);
-    io.to(to).emit("peer:nego:needed", { from: socket.id, offer });
-  });
+  // socket.on("peer:nego:needed", ({ to, offer }) => {
+  //   console.log("peer:nego:needed", offer);
+  //   io.to(to).emit("peer:nego:needed", { from: socket.id, offer });
+  // });
 
-  socket.on("peer:nego:done", ({ to, ans }) => {
-    console.log("peer:nego:done", ans);
-    io.to(to).emit("peer:nego:final", { from: socket.id, ans });
-  });
+  // socket.on("peer:nego:done", ({ to, ans }) => {
+  //   console.log("peer:nego:done", ans);
+  //   io.to(to).emit("peer:nego:final", { from: socket.id, ans });
+  // });
   // Handle disconnection
   socket.on("disconnect", () => {
     console.log("User disconnected: " + socket.id);

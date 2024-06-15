@@ -1,134 +1,83 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SocketManager } from '../Socketmanager';
 import { InputBox } from '../Component/InputBox';
 import { Button } from '../Component/Button';
 import { socket } from '../Socketmanager';
-import peer from '../Services/Peer';
+import '../Pages/VoiceChat.css';
+import { Peer } from "peerjs";
+import { connect } from 'socket.io-client';
+
 const VoiceChat = () => {
     const [joinedRoom, setJoinedRoom] = useState(false);
-    const [remoteSocketid, setRemoteSocketid] = useState();
-    const [remoteStream, setRemoteStream] = useState();
-
-    const [mystream, setMystream] = useState(null); // Changed to null initially
     const [roomId, setRoomId] = useState('');
+    const myPeer = new Peer();
+    const [mystream, setMystream] = useState(null);
+    const [remotestream, setRemoteStream] = useState(null);
 
-    const handleJoinedRoom = async (room) => {
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({
-                audio: true,
-                video: true,
-            });
-            setMystream(stream);
-            console.log(mystream)
-            console.log('Joined Room: ' + room);
-            setJoinedRoom(true);
-            setRemoteSocketid(room);
-            console.log(remoteSocketid);
-
-            // Start webRTC functionality here
-            const offer = await peer.getOffer();
-            socket.emit("user:call", { to: room, offer });
-
-        } catch (error) {
-            console.error('Error accessing webcam:', error);
-        }
-    };
-    const sendStreams = useCallback(() => {
-        console.log(mystream)
-        if (mystream && mystream.getTracks) { // Add null and method existence check
-            for (const track of mystream.getTracks()) {
-                peer.peer.addTrack(track, mystream);
-            }
-            console.log('Sending streams:', mystream.getTracks());
-        } else {
-            console.warn('mystream is null or getTracks is not available.');
-        }
-    }, [mystream]);
-    const handleNegoNeedIncomming = useCallback(
-        async ({ from, offer }) => {
-            const ans = await peer.getAnswer(offer);
-            socket.emit("peer:nego:done", { to: from, ans });
-        },
-        [socket]
-    );
-    const handleNegoNeeded = useCallback(async () => {
-        const offer = await peer.getOffer();
-        console.log('Sending offer: nego');
-        socket.emit("peer:nego:needed", { offer, to: remoteSocketid });
-    }, [remoteSocketid, socket]);
-    const handleCallAccepted = useCallback(
-        ({ from, ans }) => {
-            peer.setLocalDescription(ans);
-            console.log("Call Accepted!");
-            sendStreams();
-        },
-        [sendStreams]
-    );
-    const handleNegoNeedFinal = useCallback(async ({ ans }) => {
-        console.log("nego final");
-        console.log(remoteStream);
-        await peer.setLocalDescription(ans);
-    }, []);
     useEffect(() => {
-        peer.peer.addEventListener("negotiationneeded", handleNegoNeeded);
-        return () => {
-            peer.peer.removeEventListener("negotiationneeded", handleNegoNeeded);
-        };
-    }, [handleNegoNeeded]);
-    useEffect(() => {
-        peer.peer.addEventListener("track", async (ev) => {
-            const remoteStream = ev.streams;
-            console.log("GOT TRACKS!!");
-            setRemoteStream(remoteStream[0]);
+        const videoGrid = document.getElementById('video-grid');
+        myPeer.on('open', id => {
+            console.log("Peer joined room: " + id);
         });
-    }, []);
-    const handleIncommingCall = useCallback(
-        async ({ from, offer }) => {
-            setRemoteSocketid(from);
-            console.log("Incommingcall!");
-            const stream = await navigator.mediaDevices.getUserMedia({
-                audio: true,
-                video: true,
-            });
-            setMystream(stream);
-            console.log(mystream);
-            console.log(stream)
-            console.log(`Incoming Call`, from, offer);
-            const ans = await peer.getAnswer(offer);
-            socket.emit("call:accepted", { to: from, ans });
-        },
-        [socket]
-    );
 
-    useEffect(() => {
-        socket.on('joined Room', handleJoinedRoom);
-        socket.on("incomming:call", handleIncommingCall);
-        socket.on("call:accepted", handleCallAccepted);
-        socket.on("peer:nego:needed", handleNegoNeedIncomming);
-        socket.on("peer:nego:final", handleNegoNeedFinal);
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then(stream => {
+                setMystream(stream);
+                const myVideo = document.createElement('video');
+                myVideo.srcObject = stream;
+                // myVideo.muted = true;
+                myVideo.play();
+                videoGrid.appendChild(myVideo);
+
+                myPeer.on('call', call => {
+                    call.answer(stream);
+                    const video = document.createElement('video');
+                    call.on('stream', userVideoStream => {
+                        addVideoStream(video, userVideoStream);
+                    });
+                });
+
+                socket.on('user-connected', userId => {
+                    connectToNewUser(userId, stream);
+                });
+            })
+            .catch(error => {
+                console.error('Error accessing webcam:', error);
+            });
+
         return () => {
-            socket.off('joined Room', handleJoinedRoom);
-            socket.off("incomming:call", handleIncommingCall);
-            socket.off("call:accepted", handleCallAccepted);
-            socket.off("peer:nego:needed", handleNegoNeedIncomming);
-            socket.off("peer:nego:final", handleNegoNeedFinal);
+            // Cleanup code here if needed
         };
     }, []);
-    useEffect(() => {
-        console.log('mystream updated:', mystream);
-    }, [mystream]);
-    useEffect(() => {
-        console.log(remoteSocketid);
-    }, [remoteSocketid]);
-    const handleCreateRoom = useCallback(() => {
+
+    function addVideoStream(video, stream) {
+        video.srcObject = stream;
+        video.addEventListener('loadedmetadata', () => {
+            video.play();
+        });
+        document.getElementById('video-grid').appendChild(video);
+    }
+
+    function connectToNewUser(userId, stream) {
+        const call = myPeer.call(userId, stream);
+        const video = document.createElement('video');
+        call.on('stream', userVideoStream => {
+            addVideoStream(video, userVideoStream);
+        });
+        call.on('close', () => {
+            // video.remove();
+        });
+    }
+
+    const handleCreateRoom = () => {
         console.log('Room created:', roomId);
         // Implement room creation logic here
-    }, [roomId]);
+    };
 
-    const handleJoinRoom = useCallback(() => {
+    const handleJoinRoom = () => {
         console.log('Joining Room:', roomId);
         // Implement join room logic here
-    }, [roomId]);
+    };
 
     return (
         <>
@@ -140,19 +89,22 @@ const VoiceChat = () => {
             <SocketManager />
 
             {joinedRoom && <h1>Audio Joined</h1>}
-            {mystream && (
+
+            {/* {mystream && (
                 <div>
                     <h2>Webcam Stream</h2>
                     <video autoPlay muted style={{ width: '100%', maxWidth: '400px' }} ref={(videoRef) => { if (videoRef) videoRef.srcObject = mystream; }} />
                 </div>
-            )}
+            )} */}
 
-            {remoteStream && (
+            {/* {remotestream && (
                 <div>
-                    <h2>Webcam Stream</h2>
-                    <video autoPlay muted style={{ width: '100%', maxWidth: '400px' }} ref={(videoRef) => { if (videoRef) videoRef.srcObject = remoteStream; }} />
+                    <h2>Remote Webcam Stream</h2>
+                    <video autoPlay muted style={{ width: '100%', maxWidth: '400px' }} ref={(videoRef) => { if (videoRef) videoRef.srcObject = remotestream; }} />
                 </div>
-            )}
+            )} */}
+
+            <div id="video-grid"></div>
         </>
     );
 };
