@@ -22,6 +22,8 @@ import Office from './Models/Office.js'
 import Venue from './Models/Venue.js'
 import Room from './Models/Room.js'
 import WhiteRoom from './Models/WhiteRoom.js'
+import Presentation from './Iframe/Presentationiframe.js'
+import Presentationiframe from './Iframe/Presentationiframe.js'
 THREE.ColorManagement.legacyMode = false;
 
 
@@ -129,6 +131,8 @@ export default function Experience() {
             <Venue />
             {/* <Room /> */}
             <WhiteRoom />
+            {/* <Presentationiframe / */}
+            <Presentationiframe />
             {/* <primitive object={wilow} scale={1} /> */}
             <SocketManager />
             {/* <Player2/> */}

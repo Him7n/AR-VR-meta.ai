@@ -1,5 +1,6 @@
 import { useGLTF } from '@react-three/drei'
 import React, { Suspense } from 'react'
+import ThreatreScreen from '../Iframe/ThreatreScreen'
 
 const Venue = () => {
 
@@ -12,6 +13,7 @@ const Venue = () => {
                 position={[0, -1, -148]}
 
                 scale={3} />
+            <ThreatreScreen />
         </Suspense>
     )
 }
