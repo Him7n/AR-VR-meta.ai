@@ -11,7 +11,7 @@ import { Her } from '../Models/Her';
 import Char1 from '../Models/Char1';
 import { P2 } from '../Models/P2';
 import { P } from '../Models/P';
-import {P4} from '../Models/P4';
+import { P4 } from '../Models/P4';
 import { P5 } from '../Models/P5';
 import { P3 } from '../Models/P3';
 import { LowPoly } from './LowPoly';
@@ -36,7 +36,7 @@ const Cordinates = () => {
 
   return (
     <>
-      {characters.map((character,index) => {
+      {characters.map((character, index) => {
         if (character.id === socket.id) {
 
           return <Player key={character.id} id={character.id} delta={character.delta} rotation={character.rotation} position={character.position} />
@@ -45,7 +45,7 @@ const Cordinates = () => {
           let ComponentToRender = null;
           switch (index) { // Change 4 to the number of components in the sequence
             case 1:
-              ComponentToRender = <P2 position={character.position} />;
+              ComponentToRender = <P2 position={character.position} rotation={character.rotation} />;
               break;
             case 2:
               ComponentToRender = <P3 position={character.position} />;
@@ -62,28 +62,28 @@ const Cordinates = () => {
 
 
 
-//----------
+          //----------
 
 
 
           // return <Player2 key={character.id} id={character.id} delta={character.delta} rotation={character.rotation} position={character.position} />
 
           // return (
-            // <Her  position={[character.position[0],character.position[1],character.position[2]]} scale={ 1.5 }
-            //    rotation={[0, character.rotation[0], 0]}  />
-            // <>
-            // <P2 />
-            // </>
-            // <Women1/>
-            //     <mesh castShadow position={[character.position[0],character.position[1],character.position[2]]} scale={ 1.5 }
-            //     rotation={[0, character.rotation[0], 0]}  // Set the rotation property
+          // <Her  position={[character.position[0],character.position[1],character.position[2]]} scale={ 1.5 }
+          //    rotation={[0, character.rotation[0], 0]}  />
+          // <>
+          // <P2 />
+          // </>
+          // <Women1/>
+          //     <mesh castShadow position={[character.position[0],character.position[1],character.position[2]]} scale={ 1.5 }
+          //     rotation={[0, character.rotation[0], 0]}  // Set the rotation property
 
-            //     >
-            //     <boxGeometry />
-            //     <meshStandardMaterial color="mediumpurple" />
-            // </mesh>
+          //     >
+          //     <boxGeometry />
+          //     <meshStandardMaterial color="mediumpurple" />
+          // </mesh>
 
-            //  <Player2 key={character.id} id={character.id} delta={character.delta} rotation={character.rotation} position={character.position} />
+          //  <Player2 key={character.id} id={character.id} delta={character.delta} rotation={character.rotation} position={character.position} />
           //   // <primitive object={model.scene} scale={2} position={[character.position[0],character.position[1],character.position[2]]}  castShadow={true} />
           //   null
 
