@@ -17,6 +17,7 @@ import * as THREE from 'three'
 import { useFrame, useThree } from '@react-three/fiber'
 // import { useRef } from 'react'
 import { useState, useEffect } from 'react'
+import { Text } from '@react-three/drei'
 // import { updateCamera } from '@react-three/fiber/dist/declarations/src/core/utils'
 
 
@@ -415,7 +416,18 @@ const Player = ({ id, position, rotation, delta }) => {
     return (
         <>
             {/* <PointerLockControls ref={controlsRef} /> */}
-            <OrbitControls ref={controlsRef} />
+            {/* <Text  >hirh </Text>  */}
+
+            <Text
+                scale={[0.1, 0.1, 0.1]}
+                color="black" // default
+                anchorX="center" // default
+                anchorY="bottom" // default
+                position={[position[0], position[1] + 3.7, position[2]]}
+                rotation-y={rotation[0]}
+            >
+                {socket.id}
+            </Text>            <OrbitControls ref={controlsRef} />
 
             {/* <RigidBody position={[position[0] , position[1], position[2]]} colliders={'cuboid'} friction={0}> */}
             <primitive object={model} scale={0.02} ref={body} position-y={-0.9} castShadow />

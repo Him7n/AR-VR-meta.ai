@@ -18,6 +18,10 @@ import { useFrame } from '@react-three/fiber';
 import Char1 from './Models/Char1.js';
 import { P2 } from './Models/P2.js'
 import { LowPoly } from './Utils/LowPoly.js'
+import Office from './Models/Office.js'
+import Venue from './Models/Venue.js'
+import Room from './Models/Room.js'
+import WhiteRoom from './Models/WhiteRoom.js'
 THREE.ColorManagement.legacyMode = false;
 
 
@@ -104,7 +108,7 @@ export default function Experience() {
             {/* <P2/> */}
 
             <Shop />
-            <mesh receiveShadow position-y={- 1} rotation-x={- Math.PI * 0.5} scale={80}>
+            <mesh receiveShadow position-y={- 1} rotation-x={- Math.PI * 0.5} scale={200}>
                 <planeGeometry />
                 <MeshReflectorMaterial
 
@@ -121,6 +125,10 @@ export default function Experience() {
                 // Offsets the virtual camera that projects the reflection. Useful when the reflective surface is some distance from the object's origin (default = 0)
                 />
             </mesh>
+            <Office />
+            <Venue />
+            {/* <Room /> */}
+            <WhiteRoom />
             {/* <primitive object={wilow} scale={1} /> */}
             <SocketManager />
             {/* <Player2/> */}
