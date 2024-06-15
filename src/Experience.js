@@ -1,10 +1,13 @@
-import { OrbitControls, PointerLockControls } from '@react-three/drei'
+import { OrbitControls, PointerLockControls, useFBO } from '@react-three/drei'
 import Lights from './Lights.js'
 import { CuboidCollider, Physics, RigidBody } from '@react-three/rapier'
+import { useTexture } from '@react-three/drei'
+import { MeshReflectorMaterial } from '@react-three/drei'
 import Player from './Player.js'
 import * as THREE from 'three';
 import Player2 from './Player2.js';
 import { SocketManager, charactersAtom, socket } from './Socketmanager.js';
+import { useFBX } from '@react-three/drei'
 import Cordinates from './Utils/Cordinates.js';
 import { useAtom } from 'jotai';
 import Shop from './Component/Shop.js';
@@ -28,6 +31,20 @@ export default function Experience() {
     // VR
     const { gl, camera } = useThree();
     const xr = useXR();
+
+
+    const wilow = useFBX('./assets/textures/nature/willow_2.fbx')
+
+    //-- texture
+
+    const [colorMap, displacementMap, normalMap, roughnessMap, aoMap] = useTexture([
+        './assets/textures/Color.jpg',
+        './assets/textures/Displacement.jpg',
+        './assets/textures/Normal.jpg',
+        './assets/textures/Roughness.jpg',
+        './assets/textures/AmbientOcclusion.jpg',
+    ])
+
 
     // if (xr.isPresenting) {
     //     console.log("XRRR is already present")
@@ -76,22 +93,33 @@ export default function Experience() {
             </RigidBody>
 
 
-
-
-
             {/* <Player/> */}
             <mesh castShadow position-x={2} scale={1.5}>
                 <boxGeometry />
                 <meshStandardMaterial color="mediumpurple" />
             </mesh>
 
-            <RigidBody colliders="cuboid" type='fixed' restitution={0} friction={0.5} >
-                <Shop />
-                <mesh receiveShadow position-y={- 1} rotation-x={- Math.PI * 0.5} scale={80}>
-                    <planeGeometry />
-                    <meshStandardMaterial color="greenyellow" />
-                </mesh>
-            </RigidBody>
+
+
+            <Shop />
+            <mesh receiveShadow position-y={- 1} rotation-x={- Math.PI * 0.5} scale={80}>
+                <planeGeometry />
+                <MeshReflectorMaterial
+
+                    // blur={[300, 100]}
+                    // resolution={2048}
+                    // mixBlur={1}
+                    // mixStrength={60}
+                    // roughness={1}
+                    // depthScale={0}
+                    // minDepthThreshold={0.4}
+                    // maxDepthThreshold={1.4}
+                    color="#898989"
+                    metalness={1}
+                // Offsets the virtual camera that projects the reflection. Useful when the reflective surface is some distance from the object's origin (default = 0)
+                />
+            </mesh>
+            {/* <primitive object={wilow} scale={1} /> */}
             <SocketManager />
             {/* <Player2/> */}
         </Physics>

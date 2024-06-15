@@ -29,6 +29,7 @@
   width: 40vw;
   height: 40vh;
   flex-wrap: wrap;
+  opacity: 1;
 }
 .right-portion {
   opacity: 1;
@@ -47,7 +48,7 @@
   /* position: absolute; */
   color: rgba(0, 0, 0, 0.482);
 
-  opacity: 0.3;
+  opacity: 0.8;
   border: 2px solid white;
   border-radius: 15px;
   gap: 1vh;

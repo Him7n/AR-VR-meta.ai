@@ -418,7 +418,7 @@ const Player = ({ id, position, rotation, delta }) => {
             <OrbitControls ref={controlsRef} />
 
             {/* <RigidBody position={[position[0] , position[1], position[2]]} colliders={'cuboid'} friction={0}> */}
-            <primitive object={model} scale={0.02} ref={body} position-y={-1} castShadow={true} />
+            <primitive object={model} scale={0.02} ref={body} position-y={-1.4} castShadow />
 
             {/* </RigidBody> */}
 
