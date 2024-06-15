@@ -1,0 +1,15 @@
+.scrollbar-hidden {
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for Webkit browsers */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+# {
+  font-family: sans-serif;
+}
+.texti {
+  color: rgba(37, 34, 34, 0.774);
+}

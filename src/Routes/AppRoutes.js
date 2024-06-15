@@ -7,13 +7,15 @@ import Enviroment from '../Pages/Enviroment';
 import ArCube from '../AR/ArCube';
 import { Signin } from '../Pages/Signin';
 import { Signup } from '../Pages/Signup';
+import Item from '../Pages/Item';
 const AppRoutes = () => {
     return (
         <Router>
-            <Routes> 
+            <Routes>
                 <Route element={<Enviroment />} path='/' />
                 <Route path="/signup" element={<Signup />} />
-          <Route path="/signin" element={<Signin />} />
+                <Route path="/signin" element={<Signin />} />
+                <Route path="/user/product" element={<Item />} />
                 {/* <Route element={<ArCube />} path='/xr' /> */}
             </Routes>
         </Router>
