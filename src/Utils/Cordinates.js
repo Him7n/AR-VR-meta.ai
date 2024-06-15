@@ -8,6 +8,7 @@ import Player from '../Player';
 import Player2 from '../Player2';
 import { useGLTF } from '@react-three/drei';
 import { Her } from '../Models/Her';
+import Char1 from '../Models/Char1';
 
 const Cordinates = () => {
 

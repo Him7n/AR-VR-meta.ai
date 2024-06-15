@@ -12,6 +12,7 @@ import { useThree } from '@react-three/fiber';
 import { useXR } from '@react-three/xr';
 import { useState, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
+import Char1 from './Models/Char1.js';
 THREE.ColorManagement.legacyMode = false;
 
 
@@ -67,6 +68,7 @@ export default function Experience() {
 
             <Lights />
             <RigidBody>
+                {/* <Char1 /> */}
                 {/* <mesh castShadow position-x={ - 2 }>
             <sphereGeometry />
             <meshStandardMaterial color="orange" />

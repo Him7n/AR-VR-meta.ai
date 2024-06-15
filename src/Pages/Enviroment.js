@@ -12,44 +12,46 @@ import Authorize from '../Component/Authorize.js';
 import Sidebar from '../Component/Sidebar.js';
 const Enviroment = () => {
     const response = Authorize();
-    if(response!= null){
+    if (response != null) {
         console.log("naviagate to signup")
     }
-    
 
-  return (
 
-      <KeyboardControls
-          map={[
-              { name: 'forward', keys: ['ArrowUp', 'KeyW'] },
-              { name: 'back', keys: ['ArrowDown', 'KeyS'] },
-              { name: 'left', keys: ['ArrowLeft', 'KeyA'] },
-              { name: 'right', keys: ['ArrowRight', 'KeyD'] },
-              { name: 'jump', keys: ['Space'] },
-          ]}
-      >
-         <Sidebar/>
-          <Products />
-          <VRButton />
-          <Canvas
-              shadows
-              camera={{
-                  fov: 45,
-                  near: 0.1,
-                  far: 200,
-                  position: [2.5, 4, 6],
-              }}
-          >
-              <XR>
-                  <Controllers />
-                  <Hands />
-                  <Sky sunPosition={[100, 20, 100]} />
-                  <Experience />
-              </XR>
-          </Canvas>
-      </KeyboardControls>
-    
-  )
+    return (
+
+        <KeyboardControls
+            map={[
+                { name: 'forward', keys: ['ArrowUp', 'KeyW'] },
+                { name: 'back', keys: ['ArrowDown', 'KeyS'] },
+                { name: 'left', keys: ['ArrowLeft', 'KeyA'] },
+                { name: 'right', keys: ['ArrowRight', 'KeyD'] },
+                { name: 'jump', keys: ['Space'] },
+                { name: 'shift', keys: ['Shift'] },
+
+            ]}
+        >
+            <Sidebar />
+            <Products />
+            <VRButton />
+            <Canvas
+                shadows
+                camera={{
+                    fov: 45,
+                    near: 0.1,
+                    far: 200,
+                    position: [2.5, 4, 6],
+                }}
+            >
+                <XR>
+                    <Controllers />
+                    <Hands />
+                    <Sky sunPosition={[100, 20, 100]} />
+                    <Experience />
+                </XR>
+            </Canvas>
+        </KeyboardControls>
+
+    )
 }
 
 export default Enviroment

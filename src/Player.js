@@ -1,9 +1,11 @@
-import { OrbitControls, PointerLockControls, useGLTF } from '@react-three/drei'
+import { OrbitControls, PointerLockControls, useFBX, useGLTF } from '@react-three/drei'
 import { socket, charactersAtom } from './Socketmanager'
 import { useAtom } from 'jotai'
 import { menuAtom } from './Utils/GuildAtom'
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { useAnimations } from '@react-three/drei'
 import gsap from 'gsap'
+import { useControls } from 'leva'
 import { RigidBody } from '@react-three/rapier'
 import React from 'react'
 import { useRef } from 'react'
@@ -14,7 +16,7 @@ import { KeyboardControls, useKeyboardControls } from '@react-three/drei'
 import * as THREE from 'three'
 import { useFrame, useThree } from '@react-three/fiber'
 // import { useRef } from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 // import { updateCamera } from '@react-three/fiber/dist/declarations/src/core/utils'
 
 
@@ -22,7 +24,7 @@ import { useState } from 'react'
 
 const Player = ({ id, position, rotation, delta }) => {
 
-    
+
 
 
     const [showmenuAtom, setShowMenuAtom] = useAtom(menuAtom)
@@ -161,12 +163,73 @@ const Player = ({ id, position, rotation, delta }) => {
 
 
     }
-    const model = useGLTF('./model.gltf');
+    const model = useFBX('./models/Angry.fbx');
+    model.animations[0].name = 'Angry';
     // body.current.quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI);
     //**
-    // Animate it
+    // Animations
     /*/
 */
+    const AAnimations = [];
+
+    const mixer = new THREE.AnimationMixer(model);
+
+    const [currentAnimation, setcurrentAnimation] = useState("Angry")
+
+    const ani = model.animations;
+    // let aniname = ani.name;
+    console.log(ani);
+    const run = useFBX("./assets/character/running.fbx");
+    run.animations[0].name = "run";
+    // console.log(run.animations[0].name);
+    if (ani.length < 5) {
+
+        ani.push(run.animations[0])
+    }
+    ani["run"] = run.animations[0];
+    console.log(ani.length, "ani ka size")
+    // AAnimations.push({
+    //     name: "run", clip: mixer.clipAction(run.animations[0])
+    // });
+    const animations = useAnimations(ani, model)
+    // console.log(run.animations);
+    run.animations[0].name = "run";
+    console.log(run.animations[0].name);
+    // leva
+
+    //  const { animationName } = useControls({
+    //     animationName: { options: animations.names }
+    // })
+    // leva
+    console.log(animations.actions)
+    useEffect(() => {
+        const action = animations.actions[currentAnimation]
+        action
+            .reset()
+            .fadeIn(0.5)
+            .play()
+
+        return () => {
+            action.fadeOut(0.5)
+        }
+    }, [currentAnimation])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // console.log(model.scene);
     useFrame((state, delta) => {
 
@@ -175,7 +238,7 @@ const Player = ({ id, position, rotation, delta }) => {
         // body.current.rotation = new THREE.Vector3(0,Math.PI,0);
         // console.log(getkeys());
 
-        const { forward, left, right, jump, back } = getkeys();
+        const { forward, left, right, jump, back, shift } = getkeys();
         // socket.emit()
         const impulse = { x: 0, y: 0, z: 0 }
         const torque = { x: 0, y: 0, z: 0 }
@@ -237,7 +300,7 @@ const Player = ({ id, position, rotation, delta }) => {
             showmenu ? setShowMenu(false) : null;
         }
 
-        console.log(showmenu);
+        // console.log(showmenu);
         if (!showmenu) {
             const cameraPosition = new THREE.Vector3();
             cameraPosition.copy(bodyposition);
@@ -294,8 +357,14 @@ const Player = ({ id, position, rotation, delta }) => {
         //MOVE MODELS
 
         if (forward || back || left || right) {
+            setcurrentAnimation("run")
+
+            if (shift) {
+                velocity = 10;
+            }
             velocity = 5;
         } else {
+            setcurrentAnimation("Angry")
             velocity = 0;
         }
 
@@ -305,7 +374,9 @@ const Player = ({ id, position, rotation, delta }) => {
 
         const movex = walkdirection.x * velocity * delta;
         const movez = walkdirection.z * velocity * delta;
+        // console.log(movex, movez);
 
+        // -0.03307692307683356 -0.07938461538440045
         socket.emit('position', {
             x: body.current.position.x + movex,
             y: body.current.position.y,
@@ -347,7 +418,7 @@ const Player = ({ id, position, rotation, delta }) => {
             <OrbitControls ref={controlsRef} />
 
             {/* <RigidBody position={[position[0] , position[1], position[2]]} colliders={'cuboid'} friction={0}> */}
-            <primitive object={model.scene} scale={2} ref={body} position-y={-1} castShadow={true} />
+            <primitive object={model} scale={0.02} ref={body} position-y={-1} castShadow={true} />
 
             {/* </RigidBody> */}
 
