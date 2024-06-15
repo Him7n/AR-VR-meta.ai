@@ -21,13 +21,14 @@
 
 .left-portion {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   /* background-color: cyan; */
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   z-index: 10;
-  width: 20vw;
+  width: 40vw;
   height: 40vh;
+  flex-wrap: wrap;
 }
 .right-portion {
   opacity: 1;
@@ -45,8 +46,7 @@
   background-color: rgba(47, 54, 255, 0);
   /* position: absolute; */
   color: rgba(0, 0, 0, 0.482);
-  width: 15vw;
-  height: 9vh;
+
   opacity: 0.3;
   border: 2px solid white;
   border-radius: 15px;
@@ -80,4 +80,13 @@
 .left-portion > div:hover,
 .right-portion > div:hover {
   background-color: rgba(47, 255, 241, 0.52);
+}
+
+.scrollbar-hidden {
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for Webkit browsers */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
 }

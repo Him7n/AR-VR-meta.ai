@@ -9,6 +9,7 @@ import { PointerLockControls } from '@react-three/drei';
 
 import { Controllers, Hands, XRButton, XR, VRButton, ARButton } from '@react-three/xr';
 import Authorize from '../Component/Authorize.js';
+import Sidebar from '../Component/Sidebar.js';
 const Enviroment = () => {
     const response = Authorize();
     if(response!= null){
@@ -27,6 +28,7 @@ const Enviroment = () => {
               { name: 'jump', keys: ['Space'] },
           ]}
       >
+         <Sidebar/>
           <Products />
           <VRButton />
           <Canvas

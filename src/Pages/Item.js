@@ -24,16 +24,16 @@ const Item = (props) => {
     };
     return (
         <>
-            <div className=' flex  justify-center align-middle flex-row w-full h-96 gap-2'>
+            <div className=' flex  justify-center align-middle flex-row w-full h-96 gap-2 scrollbar-hidden'>
 
                 <div className='w-20 h-1/2  flex  my-auto justify-center align-middle  ' >
 
                     {/* <button className='rounded-md border-red-200' onClick={scrollLeft}>Scroll Left</button> */}
 
-                    <button className='rounded-sm w-12 bg-gray-800/70  z-10 mr-[-1rem] flex-auto' onClick={scrollLeft}> </button>
+                    <button className='rounded-sm w-12 bg-gray-800/70  z-10 mr-[-1rem] flex-auto shadow-lg' onClick={scrollLeft}> </button>
 
                 </div>
-                <div className='flex-shrink  bg-red-500 flex flex-row  flex-nowrap overflow-x-auto scrollbar-hidden shadow-lg' ref={scrollRef}  >
+                <div className='flex-shrink  bg-red-500 flex flex-row  flex-nowrap overflow-x-auto scrollbar-hidden shadow-md' ref={scrollRef}  >
                     <img src="https://i.pinimg.com/736x/9b/00/c3/9b00c35d60619273225d1ca435018084.jpg" alt="" />
                     <img src="https://i.pinimg.com/564x/4d/1a/7c/4d1a7cf33c6c133c5ec70c0ba6e1c4c5.jpg" alt="" />
                     <img src="https://i.pinimg.com/564x/4d/1a/7c/4d1a7cf33c6c133c5ec70c0ba6e1c4c5.jpg" alt="" />
@@ -43,7 +43,7 @@ const Item = (props) => {
                 <div className='w-20 h-1/2  flex my-auto align-middle justify-center ' >
                     {/* <button className="rounded-t-md" onClick={scrollRight}>Scroll Right</button> */}
                     {/* <Button label={null} onClick={scrollRight} /> */}
-                    <button className='rounded-sm bg-gray-800/70 w-12 ml-[-1.5rem]' onClick={scrollRight}> </button>
+                    <button className='rounded-sm bg-gray-800/70 w-12 ml-[-1.5rem] shadow-lg' onClick={scrollRight}> </button>
                 </div>
 
             </div>
