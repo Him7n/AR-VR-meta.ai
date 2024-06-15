@@ -9,6 +9,7 @@ import Player2 from './Player2.js';
 import { SocketManager, charactersAtom, socket } from './Socketmanager.js';
 import { useFBX } from '@react-three/drei'
 import Cordinates from './Utils/Cordinates.js';
+import TheatreStage from './Models/TheatreStage.js'
 import { useAtom } from 'jotai';
 import Shop from './Component/Shop.js';
 import { useThree } from '@react-three/fiber';
@@ -25,6 +26,8 @@ import WhiteRoom from './Models/WhiteRoom.js'
 import Presentation from './Iframe/Presentationiframe.js'
 import Presentationiframe from './Iframe/Presentationiframe.js'
 import VoiceChat from './Pages/VoiceChat.js'
+import Cinema from './Models/Cinema.js'
+import ThreatreScreen from './Iframe/ThreatreScreen.js'
 THREE.ColorManagement.legacyMode = false;
 
 
@@ -111,7 +114,7 @@ export default function Experience() {
             {/* <P2/> */}
 
             <Shop />
-            <mesh receiveShadow position-y={- 1} rotation-x={- Math.PI * 0.5} scale={200}>
+            <mesh receiveShadow position-y={- 1} rotation-x={- Math.PI * 0.5} scale={300}>
                 <planeGeometry />
                 <MeshReflectorMaterial
 
@@ -131,6 +134,8 @@ export default function Experience() {
             <Office />
             <Venue />
             {/* <Room /> */}
+            <Cinema />
+            <TheatreStage />
             <WhiteRoom />
             {/* <Presentationiframe / */}
             <Presentationiframe />
