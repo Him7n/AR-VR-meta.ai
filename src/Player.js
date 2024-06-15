@@ -23,7 +23,7 @@ import { Text } from '@react-three/drei'
 
 
 
-const Player = ({ id, position, rotation, delta }) => {
+const Player = ({ id, position, rotation, delta, aanimations }) => {
 
 
 
@@ -182,12 +182,17 @@ const Player = ({ id, position, rotation, delta }) => {
     console.log(ani);
     const run = useFBX("./assets/character/running.fbx");
     run.animations[0].name = "run";
+    const sit = useFBX("./assets/character/Sitting.fbx")
+    sit.animations[0].name = "sit"
     // console.log(run.animations[0].name);
     if (ani.length < 5) {
 
         ani.push(run.animations[0])
+        ani.push(sit.animations[0])
+
     }
     ani["run"] = run.animations[0];
+    ani["sit"] = sit.animations[0];
     console.log(ani.length, "ani ka size")
     // AAnimations.push({
     //     name: "run", clip: mixer.clipAction(run.animations[0])
@@ -241,6 +246,8 @@ const Player = ({ id, position, rotation, delta }) => {
 
         const { forward, left, right, jump, back, shift } = getkeys();
         // socket.emit()
+        console.log(jump + " " + shift + " " + left + " " + right + " " + back + " " + shift);
+
         const impulse = { x: 0, y: 0, z: 0 }
         const torque = { x: 0, y: 0, z: 0 }
         const impulseStrength = delta;
@@ -352,17 +359,45 @@ const Player = ({ id, position, rotation, delta }) => {
 
         //walk run velocity
         let velocity = 0;
+        // if (aanimations == "sit") {
+        //     setcurrentAnimation("sit");
+        // }
+        // if (shift) {
+        //     console.log("Shifttttttttttttttttttttttttt")
+        //     socket.emit('animation', {
+        //         animation: "sit"
+        //     });
+        // } else {
+        //     socket.emit('animation', {
+        //         animation: ""
+        //     });
+        // }
+
+        console.log(jump);
 
 
 
         //MOVE MODELS
+        // if (aanimations == 'sit') {
+        //     velocity = 0;
+        //     setcurrentAnimation("sit");
+        // } else
 
-        if (forward || back || left || right) {
+        if (jump) {
+            velocity = 0;
+            setcurrentAnimation("sit");
+            socket.emit('animation', {
+                animation: "sit"
+            });
+        } else if (forward || back || left || right) {
+            socket.emit('animation', {
+                animation: " "
+            });
+
+            console.log("Shift" + shift);
             setcurrentAnimation("run")
 
-            if (shift) {
-                velocity = 10;
-            }
+
             velocity = 5;
         } else {
             setcurrentAnimation("Angry")

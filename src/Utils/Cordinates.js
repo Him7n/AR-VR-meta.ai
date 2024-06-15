@@ -39,21 +39,21 @@ const Cordinates = () => {
       {characters.map((character, index) => {
         if (character.id === socket.id) {
 
-          return <Player key={character.id} id={character.id} delta={character.delta} rotation={character.rotation} position={character.position} />
+          return <Player key={character.id} id={character.id} delta={character.delta} rotation={character.rotation} position={character.position} aanimations={character.animation} />
         } else {
 
           let ComponentToRender = null;
           switch (index) { // Change 4 to the number of components in the sequence
             case 1:
-              ComponentToRender = <P2 position={character.position} rotation={character.rotation} />;
+              ComponentToRender = <P2 position={character.position} aanimations={character.animation} rotation={character.rotation} />;
               break;
             case 2:
-              ComponentToRender =<P3 position={character.position} rotation={character.rotation} />
+              ComponentToRender = <P3 position={character.position} aanimation={character.animation} rotation={character.rotation} />
               break;
             case 3:
-              ComponentToRender =<P4 position={character.position} rotation={character.rotation} />
+              ComponentToRender = <P4 position={character.position} aanimation={character.animation} rotation={character.rotation} />
             default:
-              ComponentToRender = <P position={character.position} rotation={character.rotation} />
+              ComponentToRender = <P position={character.position} aanimation={character.animation} rotation={character.rotation} />
               break;
           }
           return ComponentToRender;

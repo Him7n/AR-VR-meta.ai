@@ -17,14 +17,18 @@ export const P2 = (props) => {
     const bodyRef = useRef();
     const model = useFBX("./assets/character/Character2.fbx")
     const ani = model.animations;
-
+    console.log("P2 chala");
+    console.log(props.aanimations);
     model.animations[0].name = 'Idle';
     const [currentAnimation, setcurrentAnimation] = useState("Idle")
     const walk = useFBX("./assets/character/running1.fbx");
+    const sit = useFBX("./assets/character/Sitting1.fbx")
+    sit.animations[0].name = "sit"
     walk.animations[0].name = "walk"
     if (ani.length < 5) {
 
         ani.push(walk.animations[0])
+        ani.push(sit.animations[0])
     }
     const animations = useAnimations(ani, model)
 
@@ -54,15 +58,17 @@ export const P2 = (props) => {
         let distance = bodyRef.current.position.distanceTo(positvector);
 
         console.log(props)
-        if (distance == 0) {
+        if (props.aanimations == "sit") {
+            setcurrentAnimation("sit");
+        } else if (distance == 0) {
             console.log("OIIIDDLLLEEE")
-            if (currentAnimation == "walk") {
+            if (currentAnimation != "Idle") {
                 setcurrentAnimation("Idle")
             }
         } else {
             console.log(distance);
             console.log("walkkk")
-            if (currentAnimation == "Idle") {
+            if (currentAnimation != "walk") {
                 setcurrentAnimation("walk");
             }
         }
