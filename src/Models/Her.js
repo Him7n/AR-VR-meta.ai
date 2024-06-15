@@ -8,11 +8,11 @@ import { useFrame } from "@react-three/fiber";
 
 
 export function Her(props) {
-    const group = useRef();
-    const { scene,  animations } = useGLTF("./model(1).gltf");
-    const { actions } = useAnimations(animations, group);
+  const group = useRef();
+  const { scene, animations } = useGLTF("./model(1).gltf");
+  const { actions } = useAnimations(animations, group);
   const { nodes, materials } = useGLTF("/model(1).gltf");
-  console.log(props.position[0]);
+  // console.log(props.position[0]);
 
   useFrame((state, delta) => {
 
@@ -26,13 +26,14 @@ export function Her(props) {
     // }
     // console.log(group.current.position);
     // console.log(props.position);
-    console.log(group.current.position);
-    group.current.position.x =props.position[0] ;
-    group.current.position.y =props.position[1] ;
-    group.current.position.z=props.position[2] ;
+
+    // console.log(group.current.position);
+    group.current.position.x = props.position[0];
+    group.current.position.y = props.position[1];
+    group.current.position.z = props.position[2];
 
     group.current.rotation.y = props.rotation;
-    
+
     // if (group.current.position.distanceTo(props.position) > 0.01) {
     //     const direction = group.current.position
     //         .clone()
@@ -46,12 +47,12 @@ export function Her(props) {
 
     //     setAnimation("CharacterArmature|Idle");
     // }
-});
+  });
 
 
 
   return (
-    <group ref={group}    dispose={null}>
+    <group ref={group} dispose={null}>
       <group rotation={[Math.PI / 2, 0, Math.PI]}>
         <mesh
           castShadow

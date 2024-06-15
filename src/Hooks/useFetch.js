@@ -1,21 +1,29 @@
-import React, { lazy, useEffect, useState } from 'react'
-import axios from 'axios'
+// Hooks/useFetch.js
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-function useFetch() {
-    const [loading, setLoading] = useState(false)
-    const [data, setData] = useState(null)
+const useFetch = (url) => {
+    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
 
-    useEffect(async () => {
-        setLoading(true)
-        const response = await axios.get("https://fakestoreapi.com/products")
-      
-        setLoading(false);
-        
-    }, [])
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(url);
+                setData(response.data);
+                console.log(response.data);
+                setLoading(false);
+            } catch (error) {
+                setError(error);
+                setLoading(false);
+            }
+        };
 
+        fetchData();
+    }, [url]);
 
+    return { loading, data, error };
+};
 
-    return { loading, data }
-}
-
-export default useFetch
+export default useFetch;

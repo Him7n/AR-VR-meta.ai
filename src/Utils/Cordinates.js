@@ -14,7 +14,7 @@ const Cordinates = () => {
   const model = useGLTF('./model.gltf');
 
   //----------
-  console.log(`my socket id ${socket.id}`);
+  // console.log(`my socket id ${socket.id}`);
   const [characters] = useAtom(charactersAtom);
   // console.log(characters.length);
 
@@ -28,31 +28,31 @@ const Cordinates = () => {
 
   return (
     <>
-      {characters.map((character) =>{
-      if(character.id === socket.id){
+      {characters.map((character) => {
+        if (character.id === socket.id) {
 
-       return <Player key={character.id} id={character.id} delta={character.delta} rotation={character.rotation} position={character.position} />
-      }else{
-        // return <Player2 key={character.id} id={character.id} delta={character.delta} rotation={character.rotation} position={character.position} />
+          return <Player key={character.id} id={character.id} delta={character.delta} rotation={character.rotation} position={character.position} />
+        } else {
+          // return <Player2 key={character.id} id={character.id} delta={character.delta} rotation={character.rotation} position={character.position} />
 
-        return (
-        // <Her  position={[character.position[0],character.position[1],character.position[2]]} scale={ 1.5 }
-        //    rotation={[0, character.rotation[0], 0]}  />
-           <Her  key={character.id} delta={character.delta} rotation={character.rotation} position={character.position}  />
-      //     <mesh castShadow position={[character.position[0],character.position[1],character.position[2]]} scale={ 1.5 }
-      //     rotation={[0, character.rotation[0], 0]}  // Set the rotation property
-          
-      //     >
-      //     <boxGeometry />
-      //     <meshStandardMaterial color="mediumpurple" />
-      // </mesh>
+          return (
+            // <Her  position={[character.position[0],character.position[1],character.position[2]]} scale={ 1.5 }
+            //    rotation={[0, character.rotation[0], 0]}  />
+            <Her key={character.id} delta={character.delta} rotation={character.rotation} position={character.position} />
+            //     <mesh castShadow position={[character.position[0],character.position[1],character.position[2]]} scale={ 1.5 }
+            //     rotation={[0, character.rotation[0], 0]}  // Set the rotation property
 
-      //  <Player2 key={character.id} id={character.id} delta={character.delta} rotation={character.rotation} position={character.position} />
-      // <primitive object={model.scene} scale={2} position={[character.position[0],character.position[1],character.position[2]]}  castShadow={true} />
+            //     >
+            //     <boxGeometry />
+            //     <meshStandardMaterial color="mediumpurple" />
+            // </mesh>
 
-        )
+            //  <Player2 key={character.id} id={character.id} delta={character.delta} rotation={character.rotation} position={character.position} />
+            // <primitive object={model.scene} scale={2} position={[character.position[0],character.position[1],character.position[2]]}  castShadow={true} />
+
+          )
+        }
       }
-}
       )}
     </>
   );
