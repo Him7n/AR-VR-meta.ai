@@ -4,7 +4,7 @@ import React from 'react'
 const ThreatreScreen = () => {
     return (<>
 
-        <Html occlude="blending" transform position={[0, 10, -179.5]}
+        <Html occlude="blending" zIndexRange={[10, 1]} transform position={[0, 10, -179.5]}
             scale={1}  >
             <iframe width={"1450px"} height={"700vh"} src="https://www.bugswriter.com/work/" frameborder="5" />
 

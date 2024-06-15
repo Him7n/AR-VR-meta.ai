@@ -17,7 +17,7 @@ const Sidebar = (props) => {
         <div ref={sideRef} onClick={Onclick} className='w-[3vw] text-white absolute z-10' >
             <img src="./menu.png" alt="" />
 
-            <div className='w-[9rem] bg-slate-800/10 h-[100vh] mt-[-1.7rem] ml-[-9rem] z-10 absolute  flex flex-col justify-start align-middle py-[5vh] gap-[2px] ' >
+            <div className='w-[9rem] bg-slate-800/10 h-[100vh] mt-[-1.7rem] ml-[-9rem] z-50 absolute  flex flex-col justify-start align-middle py-[5vh] gap-[2px] ' >
 
 
                 <div className="w-full   rounded-sm text-[20px] hover:bg-gray-700/10  text-gray-700/70 text-center hover:duration-150 z-10 p-[0.3rem]">Profile</div>

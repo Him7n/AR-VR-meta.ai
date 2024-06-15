@@ -13,7 +13,7 @@ const Venue = () => {
                 position={[0, -1, -148]}
 
                 scale={3} />
-            {/* <ThreatreScreen /> */}
+            <ThreatreScreen />
         </Suspense>
     )
 }

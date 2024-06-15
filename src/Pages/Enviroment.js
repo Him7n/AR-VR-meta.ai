@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Experience from "../Experience.js";
 import { FlyControls, KeyboardControls, Sky } from '@react-three/drei';
 import { PointerLockControls } from '@react-three/drei';
-
+import { Html } from '@react-three/drei';
 import { Controllers, Hands, XRButton, XR, VRButton, ARButton } from '@react-three/xr';
 import Authorize from '../Component/Authorize.js';
 import Sidebar from '../Component/Sidebar.js';
