@@ -48,13 +48,12 @@ const Cordinates = () => {
               ComponentToRender = <P2 position={character.position} rotation={character.rotation} />;
               break;
             case 2:
-              ComponentToRender = <P3 position={character.position} />;
+              ComponentToRender =<P3 position={character.position} rotation={character.rotation} />
               break;
             case 3:
-              ComponentToRender = <P4 position={character.position} />;
-              break;
+              ComponentToRender =<P4 position={character.position} rotation={character.rotation} />
             default:
-              ComponentToRender = <P5 position={character.position} />;
+              ComponentToRender = <P position={character.position} rotation={character.rotation} />
               break;
           }
           return ComponentToRender;
