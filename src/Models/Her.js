@@ -55,8 +55,7 @@ export function Her(props) {
     <group ref={group} dispose={null}>
       <group rotation={[Math.PI / 2, 0, Math.PI]}>
         <mesh
-          castShadow
-          receiveShadow
+
           geometry={nodes.Cube020.geometry}
           material={materials["Purple.008"]}
         />

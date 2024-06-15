@@ -384,7 +384,7 @@ const Player = ({ id, position, rotation, delta }) => {
         });
         body.current.position.x += movex;
         body.current.position.z += movez;
-        body.current.position.y = position[1];
+        // body.current.position.y = position[1];
         socket.emit('delta', {
             x: movex,
             y: 0,
@@ -418,7 +418,7 @@ const Player = ({ id, position, rotation, delta }) => {
             <OrbitControls ref={controlsRef} />
 
             {/* <RigidBody position={[position[0] , position[1], position[2]]} colliders={'cuboid'} friction={0}> */}
-            <primitive object={model} scale={0.02} ref={body} position-y={-1.4} castShadow />
+            <primitive object={model} scale={0.02} ref={body} position-y={-0.9} castShadow />
 
             {/* </RigidBody> */}
 

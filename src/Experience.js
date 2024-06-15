@@ -16,6 +16,8 @@ import { useXR } from '@react-three/xr';
 import { useState, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import Char1 from './Models/Char1.js';
+import { P2 } from './Models/P2.js'
+import { LowPoly } from './Utils/LowPoly.js'
 THREE.ColorManagement.legacyMode = false;
 
 
@@ -84,13 +86,13 @@ export default function Experience() {
             <Cordinates />
 
             <Lights />
-            <RigidBody>
-                {/* <Char1 /> */}
-                {/* <mesh castShadow position-x={ - 2 }>
+            {/* <Char1 /> */}
+            {/* <mesh castShadow position-x={ - 2 }>
             <sphereGeometry />
             <meshStandardMaterial color="orange" />
         </mesh> */}
-            </RigidBody>
+            {/* <P2 /> */}
+            {/* <LowPoly /> */}
 
 
             {/* <Player/> */}
@@ -99,7 +101,7 @@ export default function Experience() {
                 <meshStandardMaterial color="mediumpurple" />
             </mesh>
 
-
+            {/* <P2/> */}
 
             <Shop />
             <mesh receiveShadow position-y={- 1} rotation-x={- Math.PI * 0.5} scale={80}>

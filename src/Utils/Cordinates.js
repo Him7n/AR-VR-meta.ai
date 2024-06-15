@@ -9,6 +9,13 @@ import Player2 from '../Player2';
 import { useGLTF } from '@react-three/drei';
 import { Her } from '../Models/Her';
 import Char1 from '../Models/Char1';
+import { P2 } from '../Models/P2';
+import { P } from '../Models/P';
+import {P4} from '../Models/P4';
+import { P5 } from '../Models/P5';
+import { P3 } from '../Models/P3';
+import { LowPoly } from './LowPoly';
+import { Women1 } from '../Models/Women1';
 
 const Cordinates = () => {
 
@@ -29,17 +36,45 @@ const Cordinates = () => {
 
   return (
     <>
-      {characters.map((character) => {
+      {characters.map((character,index) => {
         if (character.id === socket.id) {
 
           return <Player key={character.id} id={character.id} delta={character.delta} rotation={character.rotation} position={character.position} />
         } else {
+
+          let ComponentToRender = null;
+          switch (index) { // Change 4 to the number of components in the sequence
+            case 1:
+              ComponentToRender = <P2 position={character.position} />;
+              break;
+            case 2:
+              ComponentToRender = <P3 position={character.position} />;
+              break;
+            case 3:
+              ComponentToRender = <P4 position={character.position} />;
+              break;
+            default:
+              ComponentToRender = <P5 position={character.position} />;
+              break;
+          }
+          return ComponentToRender;
+
+
+
+
+//----------
+
+
+
           // return <Player2 key={character.id} id={character.id} delta={character.delta} rotation={character.rotation} position={character.position} />
 
-          return (
+          // return (
             // <Her  position={[character.position[0],character.position[1],character.position[2]]} scale={ 1.5 }
             //    rotation={[0, character.rotation[0], 0]}  />
-            <Her key={character.id} delta={character.delta} rotation={character.rotation} position={character.position} />
+            // <>
+            // <P2 />
+            // </>
+            // <Women1/>
             //     <mesh castShadow position={[character.position[0],character.position[1],character.position[2]]} scale={ 1.5 }
             //     rotation={[0, character.rotation[0], 0]}  // Set the rotation property
 
@@ -49,9 +84,10 @@ const Cordinates = () => {
             // </mesh>
 
             //  <Player2 key={character.id} id={character.id} delta={character.delta} rotation={character.rotation} position={character.position} />
-            // <primitive object={model.scene} scale={2} position={[character.position[0],character.position[1],character.position[2]]}  castShadow={true} />
+          //   // <primitive object={model.scene} scale={2} position={[character.position[0],character.position[1],character.position[2]]}  castShadow={true} />
+          //   null
 
-          )
+          // )
         }
       }
       )}
