@@ -28,6 +28,8 @@ import Presentationiframe from './Iframe/Presentationiframe.js'
 import VoiceChat from './Pages/VoiceChat.js'
 import Cinema from './Models/Cinema.js'
 import ThreatreScreen from './Iframe/ThreatreScreen.js'
+import Banner from './Models/Banner.js'
+import TicketBooth from './Models/TicketBooth.js'
 THREE.ColorManagement.legacyMode = false;
 
 
@@ -117,7 +119,7 @@ export default function Experience() {
             <mesh receiveShadow position-y={- 1} rotation-x={- Math.PI * 0.5} scale={300}>
                 <planeGeometry />
                 <MeshReflectorMaterial
-
+                    side={2}
                     // blur={[300, 100]}
                     // resolution={2048}
                     // mixBlur={1}
@@ -135,10 +137,11 @@ export default function Experience() {
             <Venue />
             {/* <Room /> */}
             <Cinema />
+            <TicketBooth />
             <TheatreStage />
             <WhiteRoom />
             {/* <Presentationiframe / */}
-            <Presentationiframe />
+            <Banner />
             {/* <primitive object={wilow} scale={1} /> */}
             <SocketManager />
             {/* <VoiceChat/> */}
