@@ -1,3 +1,7 @@
+*{
+  font-family: sans-serif;
+}
+
 .scrollbar-hidden {
   scrollbar-width: none;
 }
@@ -7,9 +11,8 @@
   display: none;
 }
 
-# {
-  font-family: sans-serif;
-}
+
+
 .texti {
   color: rgba(37, 34, 34, 0.774);
 }

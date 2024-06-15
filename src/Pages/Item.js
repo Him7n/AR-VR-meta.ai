@@ -30,8 +30,7 @@ const Item = (props) => {
 
                     {/* <button className='rounded-md border-red-200' onClick={scrollLeft}>Scroll Left</button> */}
 
-                    <Button label={null} className={"w-full"} onClick={scrollLeft} />
-
+                    <button className='rounded-sm w-12 bg-gray-800/70  z-10 mr-[-1rem] flex-auto' onClick={scrollLeft}> </button>
 
                 </div>
                 <div className='flex-shrink  bg-red-500 flex flex-row  flex-nowrap overflow-x-auto scrollbar-hidden shadow-lg' ref={scrollRef}  >
@@ -43,7 +42,8 @@ const Item = (props) => {
 
                 <div className='w-20 h-1/2  flex my-auto align-middle justify-center ' >
                     {/* <button className="rounded-t-md" onClick={scrollRight}>Scroll Right</button> */}
-                    <Button label={null} onClick={scrollRight} />
+                    {/* <Button label={null} onClick={scrollRight} /> */}
+                    <button className='rounded-sm bg-gray-800/70 w-12 ml-[-1.5rem]' onClick={scrollRight}> </button>
                 </div>
 
             </div>
@@ -73,18 +73,35 @@ const Item = (props) => {
 
                 </div>
 
-                <div className='h-40 mt-2 bg-slate-700 rounded-md p-10'>
+                <div className='h-1/2 mt-2 bg-slate-700/50 rounded-md px-5 py-10'>
 
-                    <div className='h-10 text-center' >kjhlkh</div>
+                    <div className='h-10 text-[1.6rem] flex justify-evenly align-middle text-white mb-[2rem] text-center font-medium ' >
+
+                        <h1 className='text-center flex justify-center align-middle my-auto     flex-auto leading-[3rem] ' >12
+
+                            <img src="/eth.png" className='h-12' alt="" />
+                        </h1>
+                        <h1 className='text-center flex justify-center align-middle my-auto     flex-auto leading-[3rem] ' >12
+
+                            <img src="/eth.png" className='h-12' alt="" />
+                        </h1>
+                        <h1 className='text-center flex justify-center align-middle my-auto     flex-auto leading-[3rem] ' >12
+
+                            <img src="/nft.png" className='h-12' alt="" />
+                        </h1>
+
+
+                    </div>
                     <div className='flex justify-around align-middle' >
-                        <button className='bg-white' >Buy</button>
-                        <button>Buy</button>
+                        <button className='  px-12 py-2 text-yellow-100  text-[2rem] border-2  rounded-md hover:bg-white hover:text-black   ' >Buy</button>
+                        <button className=' px-12 py-2 text-yellow-100  text-[2rem] border-2  rounded-md hover:bg-white hover:text-black ' >   Buy</button>
+                        <button className=' px-12 py-2 text-[2rem]  hover:bg-white hover:text-black text-yellow-100 border-2 rounded-md' >   Buy</button>
                     </div>
 
 
                 </div>
 
-            </div>
+            </div >
         </>
     )
 }
