@@ -1,6 +1,6 @@
+// Server-side
 import { createServer } from "http";
 import { Server } from "socket.io";
-// import { socket } from "../src/Socketmanager";
 
 const httpServer = createServer();
 const io = new Server(httpServer, {
@@ -10,21 +10,26 @@ const io = new Server(httpServer, {
     credentials: true
   }
 });
+
 io.listen(3001);
+
+// Array to store characters
 const characters = [];
+const sockettoroom = new Map();
+// Function to generate random position
 const generateRandomPosition = () => {
   return [Math.random() * 3, -0.9, Math.random() * 3];
 }
+
 io.on("connection", (socket) => {
-  console.log("User connected!!" + socket.id)
+  console.log("User connected: " + socket.id);
 
-
-  // in ject it into the  characters array
-
-
-  // console.log(characters);
-
-
+  // Automatically join a room upon connection
+  sockettoroom.set(socket.id, "   gameRoom");
+  // console.log("User joined: " + socket.id + "gameRoom");
+  io.to('gameRoom').emit('joined Room', socket.id);
+  socket.join('gameRoom');
+  // Add new character to the characters array and emit 'spawn' event to all clients
   characters.push({
     id: socket.id,
     delta: [0, 0, 0],
@@ -32,55 +37,57 @@ io.on("connection", (socket) => {
     avatar: 0,
     position: generateRandomPosition(),
   });
-  // console.log(characters);
-  io.emit("spawn", characters);
+  io.to('gameRoom').emit("spawn", characters);
+  socket.on("user:call", ({ to, offer }) => {
+    console.log({ to });
 
-  //-------
-
+    io.to(to).emit("incomming:call", { from: socket.id, offer });
+  });
+  socket.on("call:accepted", ({ to, ans }) => {
+    io.to(to).emit("call:accepted", { from: socket.id, ans });
+  });
+  // Handle rotation event
   socket.on("rotation", (rotation) => {
-    const character = characters.find((character) => { return character.id === socket.id });
-    character.rotation = rotation;
-    // console.log(characters);
-    io.emit("spawn", characters);
-  })
-
-  socket.on("position", (position) => {
-    console.log(characters.length);
-    const character = characters.find((character) => { return character.id === socket.id });
-    character.position = [
-      position.x,
-      position.y,
-      position.z
-    ];
-    // console.log(characters);
-    io.emit("spawn", characters);
-  })
-
-
-  socket.on("delta", (delta) => {
-    const character = characters.find((character) => { return character.id === socket.id });
-    character.delta = [
-      delta.x,
-      delta.y,
-      delta.z
-    ];
-    // console.log(characters);
-    io.emit("spawn", characters);
-  })
-  //---------
-
-  socket.on("disconnect", () => {
-    console.log(socket.id + " User disconnected!!");
-    const index = characters.findIndex((character) => character.id === socket.id);
-    if (index !== -1) {
-      characters.splice(index, 1);
-
-      console.log(characters);
-      io.emit("spawn", characters);
+    const character = characters.find((character) => character.id === socket.id);
+    if (character) {
+      character.rotation = rotation;
+      io.to('gameRoom').emit("spawn", characters);
     }
   });
 
+  // Handle position event
+  socket.on("position", (position) => {
+    const character = characters.find((character) => character.id === socket.id);
+    if (character) {
+      character.position = [position.x, position.y, position.z];
+      io.to('gameRoom').emit("spawn", characters);
+    }
+  });
 
+  // Handle delta event
+  socket.on("delta", (delta) => {
+    const character = characters.find((character) => character.id === socket.id);
+    if (character) {
+      character.delta = [delta.x, delta.y, delta.z];
+      io.to('gameRoom').emit("spawn", characters);
+    }
+  });
+  socket.on("peer:nego:needed", ({ to, offer }) => {
+    console.log("peer:nego:needed", offer);
+    io.to(to).emit("peer:nego:needed", { from: socket.id, offer });
+  });
 
+  socket.on("peer:nego:done", ({ to, ans }) => {
+    console.log("peer:nego:done", ans);
+    io.to(to).emit("peer:nego:final", { from: socket.id, ans });
+  });
+  // Handle disconnection
+  socket.on("disconnect", () => {
+    console.log("User disconnected: " + socket.id);
+    const index = characters.findIndex((character) => character.id === socket.id);
+    if (index !== -1) {
+      characters.splice(index, 1);
+      io.to('gameRoom').emit("spawn", characters);
+    }
+  });
 });
-
