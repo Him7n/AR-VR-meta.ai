@@ -31,7 +31,7 @@ const File = () => {
         console.log(response.data.outputFilePath);
         if (response.data.outputFilePath) {
             setmessage("File uploaded");
-            seturl("./" + response.data.filename);
+            seturl(`http://localhost:3002/${response.data.filename}`);
             console.log(url);
             setShow(true);
             setLoading(false);
@@ -41,7 +41,9 @@ const File = () => {
         <>
             <Html occlude={"blending"} transform
                 scale={0.15} rotation-y={-Math.PI / 30}
-                position={[-60, 2, 15]}
+                position={[-60, 2, 15]
+
+                }
 
                 zIndexRange={[10, 3]} >
                 <div className='w-auto py-4 h-auto font-sans text-[10px] border-gray-800 border-[1px] px-6  gap-4 text-center flex flex-col bg-cyan-400/45 backdrop-blur-sm    '>
@@ -54,7 +56,8 @@ const File = () => {
                 {message}
             </Html >
             {/* <OfficeIframe url={""} /> */}
-            {show && <OfficeIframe url={url} />}
+            {!show && loading}
+            {<OfficeIframe url={url} />}
             {/* <OfficeIframe url={url} /> */}
         </>
     )

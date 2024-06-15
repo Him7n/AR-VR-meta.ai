@@ -9,7 +9,7 @@ const Office = () => {
 
     const room = useGLTF('./models/modern_office.glb');
     const stand = useGLTF('./models/screen_stand.glb');
-    return (<Suspense><group position-x={60} position-z={-33}
+    return (<Suspense><group position-x={62} position-z={-33}
     >
         <mesh castShadow position-x={60}
 

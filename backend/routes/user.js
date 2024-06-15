@@ -14,11 +14,11 @@ import { downloadFile } from '../Ml/NullPointerD.js';
 
 import { askai } from '../Ml/langchain.js';
 const currentDirectory = process.cwd()
-const targetDirectory = path.join(currentDirectory, '..', 'public');
+// const targetDirectory = path.join(currentDirectory, '..', 'public');
 
 // Change the current directory to the target directory
-process.chdir(targetDirectory);
-console.log(targetDirectory);
+// process.chdir(targetDirectory);
+// console.log(targetDirectory);
 const router = express.Router();
 
 const signupBody = zod.object({
@@ -160,9 +160,9 @@ router.post('/upload', async (req, res) => {
     console.log(fileURL);
     const regex = /[^\\/]+$/; // Regex pattern to match the filename
     const filename = pathofFile.match(regex);
-    const outputFilePath = targetDirectory + '\\' + filename;
+    // const outputFilePath = '\\' + filename;
+    const outputFilePath = `public/${filename}`;
     console.log('Output File Path:', outputFilePath);
-    // const outputFilePath = `./Ml/${filename}`;
     // console.log(outputFilePath[0]);
     downloadFile(fileURL, outputFilePath)
         .then(() => {
