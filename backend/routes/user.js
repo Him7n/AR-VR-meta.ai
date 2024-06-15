@@ -1,36 +1,49 @@
 // backend/routes/user.js
-const express = require('express');
 
+import express from 'express';
+import zod from 'zod';
+import jwt from 'jsonwebtoken';
+// const path = require('path');
+import path from 'path';
+
+import { User, Account } from '../db.js';
+import { JWT_SECRET } from '../config.js';
+import { authMiddleware } from '../middleware.js';
+import { uploadFileWithCurl } from '../Ml/NullPointer.js';
+import { downloadFile } from '../Ml/NullPointerD.js';
+
+import { askai } from '../Ml/langchain.js';
+const currentDirectory = process.cwd()
+const targetDirectory = path.join(currentDirectory, '..', 'public');
+
+// Change the current directory to the target directory
+process.chdir(targetDirectory);
+console.log(targetDirectory);
 const router = express.Router();
-const zod = require("zod");
-const { User, Account } = require("../db");
-const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = require("../config");
-const  { authMiddleware } = require("../middleware");
 
 const signupBody = zod.object({
     username: zod.string().email(),
-	firstName: zod.string(),
-	lastName: zod.string(),
-	password: zod.string()
-})
+    firstName: zod.string(),
+    lastName: zod.string(),
+    password: zod.string()
+});
 
 router.post("/signup", async (req, res) => {
-    const { success } = signupBody.safeParse(req.body)
+    const { success } = signupBody.safeParse(req.body);
     if (!success) {
         return res.status(411).json({
             message: "Email already taken / Incorrect inputs"
-        })
+        });
     }
 
     const existingUser = await User.findOne({
         username: req.body.username
-    })
+    });
 
     if (existingUser) {
         return res.status(411).json({
             message: "Email already taken/Incorrect inputs"
-        })
+        });
     }
 
     const user = await User.create({
@@ -38,13 +51,13 @@ router.post("/signup", async (req, res) => {
         password: req.body.password,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-    })
+    });
     const userId = user._id;
 
     await Account.create({
         userId,
         balance: 1 + Math.random() * 10000
-    })
+    });
 
     const token = jwt.sign({
         userId
@@ -53,50 +66,43 @@ router.post("/signup", async (req, res) => {
     res.json({
         message: "User created successfully",
         token: token
-    })
-})
+    });
+});
 
-
-router.post('/authorize', async (req,res)=>{
-
+router.post('/authorize', async (req, res) => {
     const word = req.headers.authorization.split(" ");
-    const token  =  word[1];
+    const token = word[1];
     console.log(word);
-try{
-   const response = await jwt.verify(token,JWT_SECRET)
+    try {
+        const response = await jwt.verify(token, JWT_SECRET);
 
-if(response.userId){
-    res.status(200).json({
-        message : "You are authorised"
-    })
-}else{
-    res.status(201).json({
-        message : "you are not authoriesed"
-    })
-}
-}catch(err){
-    res.status(201).json({
-        message : "you are not authoriesed"
-    })
-}
-
-  
-
-
-
-})
+        if (response.userId) {
+            res.status(200).json({
+                message: "You are authorised"
+            });
+        } else {
+            res.status(201).json({
+                message: "you are not authoriesed"
+            });
+        }
+    } catch (err) {
+        res.status(201).json({
+            message: "you are not authoriesed"
+        });
+    }
+});
 
 const signinBody = zod.object({
     username: zod.string().email(),
-	password: zod.string()
-})
+    password: zod.string()
+});
 
 router.post("/signin", async (req, res) => {
-    const { success } = signinBody.safeParse(req.body)
+    const { success } = signinBody.safeParse(req.body);
     if (!success) {
         return res.status(411).json({
             message: "Email already taken / Incorrect inputs"
-        })
+        });
     }
 
     const user = await User.findOne({
@@ -108,45 +114,85 @@ router.post("/signin", async (req, res) => {
         const token = jwt.sign({
             userId: user._id
         }, JWT_SECRET);
-  
+
         res.json({
             token: token
-        })
+        });
         return;
     }
 
-    
     res.status(411).json({
         message: "Error while logging in"
-    })
-})
+    });
+});
 
 const updateBody = zod.object({
-	password: zod.string().optional(),
+    password: zod.string().optional(),
     firstName: zod.string().optional(),
     lastName: zod.string().optional(),
-})
+});
 
 router.put("/", authMiddleware, async (req, res) => {
-    const { success } = updateBody.safeParse(req.body)
+    const { success } = updateBody.safeParse(req.body);
     if (!success) {
         res.status(411).json({
             message: "Error while updating information"
-        })
+        });
     }
 
     await User.updateOne(req.body, {
         id: req.userId
-    })
+    });
 
     res.json({
         message: "Updated successfully"
-    })
-})
+    });
+});
+
+router.post('/upload', async (req, res) => {
+    const pathofFile = req.body.path;
+    // const filenameRegex = /\/([^/]+)$/;
+    // const matches = pathofFile.match(filenameRegex);
+    // const filename = matches[1];
+    // console.log(filename);
+
+    const fileURL = await uploadFileWithCurl(pathofFile);
+    console.log(fileURL);
+    const regex = /[^\\/]+$/; // Regex pattern to match the filename
+    const filename = pathofFile.match(regex);
+    const outputFilePath = targetDirectory + '\\' + filename;
+    console.log('Output File Path:', outputFilePath);
+    // const outputFilePath = `./Ml/${filename}`;
+    // console.log(outputFilePath[0]);
+    downloadFile(fileURL, outputFilePath)
+        .then(() => {
+            console.log('File downloaded successfully!');
+            res.status(200).json({
+                message: 'File downloaded successfully!',
+                outputFilePath,
+                url: fileURL,
+                filename: filename
+            });
+        })
+        .catch((err) => {
+            console.error('Error downloading file:', err);
+            res.status(404).json({
+                message: "Error Occured"
+            });
+        });
+});
+
+router.get('/askai', async (req, res) => {
+    const pathtofile = "/home/lildicky/Dracut-x12/backend/routes/Pdf.pdf";
+    const response = await askai(pathtofile);
+    res.json({
+        message: "ai responded!",
+        data: response
+    });
+});
 
 router.get("/bulk", async (req, res) => {
     const filter = req.query.filter || "";
-
     const users = await User.find({
         $or: [{
             firstName: {
@@ -157,8 +203,7 @@ router.get("/bulk", async (req, res) => {
                 "$regex": filter
             }
         }]
-    })
-
+    });
     res.json({
         user: users.map(user => ({
             username: user.username,
@@ -166,7 +211,7 @@ router.get("/bulk", async (req, res) => {
             lastName: user.lastName,
             _id: user._id
         }))
-    })
-})
+    });
+});
 
-module.exports = router;
+export default router;

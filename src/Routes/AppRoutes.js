@@ -8,13 +8,15 @@ import ArCube from '../AR/ArCube';
 import { Signin } from '../Pages/Signin';
 import { Signup } from '../Pages/Signup';
 import Item from '../Pages/Item';
+import Upload from '../Component/Upload';
 import VoiceChat from '../Pages/VoiceChat';
+
 const AppRoutes = () => {
     return (
         <Router>
             <Routes>
                 <Route element={<Enviroment />} path='/' />
-                <Route element={<VoiceChat />} path='/vc' />
+                <Route element={<Upload />} path='/vc' />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/user/product" element={<Item />} />

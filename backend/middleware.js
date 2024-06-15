@@ -1,5 +1,8 @@
-const { JWT_SECRET } = require("./config");
-const jwt = require("jsonwebtoken");
+import { JWT_SECRET } from './config.js'; // Assuming config.js is the correct file path
+import jwt from 'jsonwebtoken';
+
+// Now you can use the imported variables and modules as needed in your code
+
 
 const authMiddleware = (req, res, next) => {
     const authHeader = req.headers.authorization;
@@ -21,6 +24,4 @@ const authMiddleware = (req, res, next) => {
     }
 };
 
-module.exports = {
-    authMiddleware
-}
+export { authMiddleware };
