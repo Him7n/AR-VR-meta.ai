@@ -28,15 +28,12 @@ const Authorize = () => {
           console.log(response.status);
 
           if (response.status === 200) {
-            // Authorization successful, do nothing
             return;
           } else {
-            // Authorization failed, navigate to signin
             navigate('/signin');
           }
         } catch (error) {
           console.error('Error occurred during authorization:', error);
-          // Navigate to signin on error
           navigate('/signin');
         }
       }

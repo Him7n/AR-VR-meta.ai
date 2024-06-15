@@ -20,7 +20,7 @@ export default function XrContainer() {
             <>
                 <ARButton />
                 <div className="container2">
-                    <Canvas style={{ width: '500px', height: '500px' }}>
+                    <Canvas style={{ width: '1000px', height: '800px' }}>
                         {!showIframe ? (<XR>
                             <XrCube />
                         </XR>) : (
