@@ -59,7 +59,7 @@ def get_vector_store(text_chunks):
 
 def get_conversational_chain():
     prompt_template = """
-    Answer the question as detailed as possible from the provided context and even outside from it but related to it and keep it short, make sure to provide all the details, don't provide the wrong answer\n\n
+    Answer the question as detailed as possible from the provided context and even outside from it but related to it and keep it short, make sure to provide all the details and do not use "*" use html tags for bolding and styling if required, don't provide the wrong answer\n\n
     Context:\n {context}?\n
     Question: \n{question}\n
 
@@ -106,15 +106,16 @@ async def process_pdf(file_path: str = Form(...)):
 
 
 @app.post("/answer_question/")
-async def answer_question():
+async def answer_question(question: str = Form(...)):
+    print(question);
     # Assuming these variables are set or obtained previously
-    file_path = "/lecture1.pdf"
-    question = "What is the topic of the PDF?"
+    # file_path = "/lecture1.pdf"
+    # question = "What is the topic of the PDF?"
 
-    # Process PDF
-    raw_text = get_pdf_text(file_path)
-    text_chunks = get_text_chunks(raw_text)
-    get_vector_store(text_chunks)
+    # # Process PDF
+    # raw_text = get_pdf_text(file_path)
+    # text_chunks = get_text_chunks(raw_text)
+    # get_vector_store(text_chunks)
 
     # Get Answer
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")

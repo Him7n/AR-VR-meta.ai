@@ -12,13 +12,15 @@ import Upload from '../Component/Upload';
 import VoiceChat from '../Pages/VoiceChat';
 import ProcessML from '../Component/ProcessML';
 import AskaiInput from '../Component/AskaiInput';
+import MessageBox from '../Component/MessageBox';
 
 const AppRoutes = () => {
     return (
         <Router>
             <Routes>
                 <Route element={<Enviroment />} path='/' />
-                <Route element={<AskaiInput />} path='/vc' />
+                <Route element={<MessageBox />} path='/vc' />
+                
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/user/product" element={<Item />} />
