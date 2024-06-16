@@ -91,7 +91,8 @@ const FormData = require("form-data");
 
     const [_ticketChek] = useAtom(TicketCheckatom)
     const [show, setShow] = useState(false)
-    const TheaterAddress = '0xD663f267A074CE8A3580872DbD953981F4d83029';
+    // 0x64bd384eA6d6B76ee7C3E1248beaA9cE3157f9dD
+    const TheaterAddress = '0x64bd384eA6d6B76ee7C3E1248beaA9cE3157f9dD';
     const [provider, setProvider] = useState(null);
     const [signer, setSigner] = useState(null);
     const [contract, setContract] = useState(null);
