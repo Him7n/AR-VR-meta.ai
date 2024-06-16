@@ -116,9 +116,6 @@ We welcome contributions from developers, designers, and creators to enhance the
  ###5.Now just do `npm run dev` in the main directort
  ###6.For Threter you must have `ErsatzTV` setup IPTV server or A Jellyfin server.
 
-## Contract address
-0x64bd384eA6d6B76ee7C3E1248beaA9cE3157f9dD
-https://sepolia.etherscan.io/address/0x64bd384eA6d6B76ee7C3E1248beaA9cE3157f9dD
 ## License
 Meta-AR-VR.ai is licensed under the MIT License. See the LICENSE file for details.
 
