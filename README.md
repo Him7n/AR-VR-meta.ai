@@ -1,17 +1,17 @@
-# Meta-AR-VR.ai
+# AR-VR-Meta.ai
 
 ## Introduction
-Welcome to Meta-AR-VR.ai, an innovative 3D Metaverse that redefines virtual interactions, conferences, education, and social connectivity. Our platform offers a comprehensive solution for smaller startups and companies seeking to conduct meetings and conferences in a virtual environment, eliminating the need for physical office spaces or conference halls. Meta-AR-VR.ai fosters seamless connections among users, regardless of geographical distances, offering an unparalleled blend of functionality and immersive experiences.
 
-At the heart of Meta-AR-VR.ai lies its advanced features, including a state-of-the-art LLM-powered chatbot that interacts with users through lifelike speech. This chatbot can parse PDF information and provide real-time assistance, enriching the user experience with personalized support. Additionally, everything within the platform is VR-enabled, with audio chat functionality enhancing communication and collaboration.
+Welcome to AR-VR-Meta.ai, an innovative 3D Metaverse that redefines education and social connectivity through virtual interactions and conferences. Our platform offers a comprehensive solution for educational institutions, students, and organizations seeking to enhance learning and social engagement in a virtual environment. AR-VR-Meta.ai fosters seamless connections among users, regardless of geographical distances, offering an unparalleled blend of functionality and immersive experiences.
 
-One of the standout features of Meta-AR-VR.ai is its Virtual Classroom, which revolutionizes online education by providing an interactive 3D learning environment. Students engage with course materials, assignments, and 3D models alongside virtual avatars and educators. Furthermore, a Homework-Helping LLM-powered chatbot augments the learning process, offering personalized assistance with assignments and course materials.
+At the heart of AR-VR-Meta.ai lies its advanced features, including a state-of-the-art LLM-powered chatbot that interacts with users through lifelike speech. This chatbot can parse PDF information and provide real-time assistance, enriching the user experience with personalized support. Additionally, everything within the platform is VR-enabled, with audio chat functionality enhancing communication and collaboration.
 
-Moreover, Meta-AR-VR.ai features a Blockchain-Powered Theater, offering a unique cinema experience where tickets are secured as NFTs, preventing black marketing and ensuring fair distribution. Users can attend virtual theater screenings and cinema watch parties with friends and family, enjoying movies in VR while maintaining audio chat functionality to interact without disturbing others.
+One of the standout features of AR-VR-Meta.ai is its Virtual Classroom, which revolutionizes online education by providing an interactive 3D learning environment. Students engage with course materials, assignments, and 3D models alongside virtual avatars and educators. Furthermore, a Homework-Helping LLM-powered chatbot augments the learning process, offering personalized assistance with assignments and course materials.
 
-Meta-AR-VR.ai is more than just a virtual environment; it's a dynamic platform that empowers users to connect, collaborate, and learn in entirely new ways. Join us in exploring the endless possibilities of the digital realm.
+AR-VR-Meta.ai is more than just a virtual environment; it's a dynamic platform that empowers users to connect, collaborate, and learn in entirely new ways. Join us in exploring the endless possibilities of the digital realm.
 
 ## Tech Stack
+
 Our platform leverages a diverse array of technologies to deliver immersive experiences and seamless interactions:
 
 - **Three.js**: A lightweight 3D library used for rendering immersive 3D graphics in web browsers.
@@ -27,9 +27,6 @@ Our platform leverages a diverse array of technologies to deliver immersive expe
 - **Socket.io**: A JavaScript library for real-time bidirectional communication between clients and servers.
 - **Drei**: A collection of useful helpers and abstractions for Three.js, enhancing the development process.
 - **Jotai**: A state management library for React applications, simplifying the management of application state.
-- **ERC-721**: A standard for non-fungible tokens (NFTs) on the Ethereum blockchain, used for tokenizing unique assets.
-- **Hardhat**: A development environment for Ethereum smart contracts, facilitating smart contract testing and deployment.
-- **Solidity**: The programming language used for writing smart contracts on the Ethereum blockchain.
 - **Sepolia**: (Please provide more information if necessary.)
 - **Express**: A web application framework for Node.js, used for building RESTful APIs and backend services.
 - **Node.js**: A runtime environment for executing JavaScript code outside of a web browser, commonly used for server-side applications.
@@ -44,38 +41,40 @@ Our platform leverages a diverse array of technologies to deliver immersive expe
 - **Remix**: An online integrated development environment (IDE) for Ethereum smart contract development and testing.
 - **NFT**: Non-fungible tokens, used for representing ownership of unique digital assets within the platform.
 - **VR**: Virtual reality technology, providing immersive 3D environments and experiences.
-- **ErsatzTV** : A platform for hosting and streaming virtual theater screenings and cinema experiences.
-- **Jellyfin** : A free and open-source media server software, facilitating the hosting and streaming of media content within the platform.
+- **ErsatzTV**: A platform for hosting and streaming virtual theater screenings and cinema experiences.
+- **Jellyfin**: A free and open-source media server software, facilitating the hosting and streaming of media content within the platform.
 
 ## About the Project
-Meta-AR-VR.ai offers a diverse range of functionalities tailored to various use cases:
 
-### VR Meeting Room
+AR-VR-Meta.ai offers a diverse range of functionalities tailored to various use cases:
+
+### VR Presentation Room
+
 The VR Meeting Room offers a professional virtual environment for conducting meetings and presentations. Users can upload PDF presentations and interact with 3D models to showcase prototypes or ideas. Real-time doubt support ensures a smooth meeting experience, while the immersive VR setting provides a sense of presence and engagement.
 
 ### Conference Hall
-The Conference
 
- Hall is designed to accommodate large-scale events and conferences with up to 500 attendees. It features a big screen for sharing information and presentations to all participants simultaneously. Presenters can showcase 3D models for educational purposes, and the entire hall is VR-enabled with audio chat support for seamless communication.
+The Conference Hall is designed to accommodate large-scale events and conferences with up to 500 attendees. It features a big screen for sharing information and presentations to all participants simultaneously. Presenters can showcase 3D models for educational purposes, and the entire hall is VR-enabled with audio chat support for seamless communication.
 
 ### Virtual Classroom
-The Virtual Classroom transforms online education by offering an immersive 3D learning environment. Students engage with course materials, assignments, and 3D models alongside virtual avatars and educators. Furthermore, a Homework-Helping LLM-powered chatbot augments the learning process, offering personalized assistance with assignments and course materials.
 
-### Blockchain-Powered Theater
-The Blockchain-Powered Theater offers a unique cinema experience where tickets are secured as NFTs, preventing black marketing and ensuring fair distribution. Users can attend virtual theater screenings and cinema watch parties with friends and family, enjoying movies in VR while maintaining audio chat functionality to interact without disturbing others.
+The Virtual Classroom transforms online education by offering an immersive 3D learning environment. Inspired by the isolation and monotony of online classes during the COVID-19 pandemic, AR-VR-Meta.ai aims to create a more engaging and interactive experience. Students engage with course materials, assignments, and 3D models alongside virtual avatars and educators. A Homework-Helping LLM-powered chatbot augments the learning process, offering personalized assistance with assignments and course materials.
 
 ## Features
+
 - Virtual meeting rooms with PDF presentation support and real-time doubt resolution.
 - Conference halls for large-scale events with 3D model showcasing and AR compatibility.
 - Virtual classrooms with interactive 3D models, assignments, and real-time support.
-- Blockchain-powered theater for immersive movie experiences and watch parties.
+- LLM-powered chatbots for personalized educational assistance and support.
+- VR-enabled environments with audio chat for enhanced communication and collaboration.
 
 ## Contributions
-We welcome contributions from developers, designers, and creators to enhance the functionality and user experience of Meta-AR-VR.ai. Please refer to our contribution guidelines for more information.
+
+We welcome contributions from developers, designers, and creators to enhance the functionality and user experience of AR-VR-Meta.ai. Please refer to our contribution guidelines for more information.
 
 ## Images
 
-![image1](./images/ImageMeeting.png) 
+![image1](./images/ImageMeeting.png)
 
 ![image1](./images/ImageMeeting1.png)
 
@@ -99,23 +98,19 @@ We welcome contributions from developers, designers, and creators to enhance the
 
 ![image1](./images/Class2.png)
 
-![image1](./images/Class3.png)
+## Video
 
-![image1](./images/ImageTheater1.png)
-
-![image1](./images/Theater2.png)
-
-## video
 ![Youtube Walkthrough Video](https://www.youtube.com/watch?v=nwlWtFL1Gkg)
 
-##HowToRun
- ###1.Run the server.js in Socket-Server
- ###2.run the app.py in Langchain-RAG-Server (`python app.py`)
- ###3.Run the index.js in the Backend (`nodemon index.js`)
- ###4.AR-server - do `npx vite --host` (AR depends on your PC's Compatiblity)
- ###5.Now just do `npm run dev` in the main directort
- ###6.For Threter you must have `ErsatzTV` setup IPTV server or A Jellyfin server.
+## How to Run
+
+1. Run the `server.js` in Socket-Server.
+2. Run the `app.py` in Langchain-RAG-Server (`python app.py`).
+3. Run the `index.js` in the Backend (`nodemon index.js`).
+4. For the AR-server, do `npx vite --host` (AR depends on your PC's compatibility).
+5. Now, just do `npm run dev` in the main directory.
+6. Go to `localhost:3000`, sign up, and enter the metaverse.
 
 ## License
-Meta-AR-VR.ai is licensed under the MIT License. See the LICENSE file for details.
 
+AR-VR-Meta.ai is licensed under the MIT License. See the LICENSE file for details.
