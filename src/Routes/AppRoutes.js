@@ -10,13 +10,15 @@ import { Signup } from '../Pages/Signup';
 import Item from '../Pages/Item';
 import Upload from '../Component/Upload';
 import VoiceChat from '../Pages/VoiceChat';
+import ProcessML from '../Component/ProcessML';
+import AskaiInput from '../Component/AskaiInput';
 
 const AppRoutes = () => {
     return (
         <Router>
             <Routes>
                 <Route element={<Enviroment />} path='/' />
-                <Route element={<Upload />} path='/vc' />
+                <Route element={<AskaiInput />} path='/vc' />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/user/product" element={<Item />} />

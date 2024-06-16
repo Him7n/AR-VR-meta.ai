@@ -182,14 +182,14 @@ router.post('/upload', async (req, res) => {
         });
 });
 
-router.get('/askai', async (req, res) => {
-    const pathtofile = "public/lecture.pdf";
-    const response = await askai(pathtofile);
-    res.json({
-        message: "ai responded!",
-        data: response
-    });
-});
+// router.get('/askai', async (req, res) => {
+//     const pathtofile = "public/lecture.pdf";
+//     const response = await askai(pathtofile);
+//     res.json({
+//         message: "ai responded!",
+//         data: response
+//     });
+// });
 
 router.get("/bulk", async (req, res) => {
     const filter = req.query.filter || "";
