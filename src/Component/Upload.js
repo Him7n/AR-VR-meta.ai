@@ -16,7 +16,7 @@ const Upload = () => {
 
         if (selectedFile) {
             console.log('Uploading file', selectedFile);
-            // Example: uploadFile(selectedFile);
+            // Example: uploadFile(selectedFile);   
         } else {
             console.log('No file selected.');
         }
@@ -34,7 +34,7 @@ const Upload = () => {
             <input type="text" id='path' className='h-4 text-[14px] border-[3px] border-black/30 p-3' name='upload' onChange={handleFileChange} />
             <button className=' bg-blue-500 text-white px-2 py-1 hover:bg-white hover:text-gray-700 border-[1px] 
             text-[15px]
-            rounded-sm transition-all ' onClick={handleUpload}>Upload</button>
+            rounded-sm transition-all ' onClick={handleUpload}>Uploddad</button>
         </div>)
 }
 

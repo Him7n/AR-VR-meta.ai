@@ -17,7 +17,7 @@ const File = () => {
     console.log(url);
     const [characters] = useAtom(charactersAtom);
     if (characters[0]) {
-        if(characters[0].url!= "" && characters[0].url != url){
+        if (characters[0].url != "" && characters[0].url != url) {
             seturl(characters[0].url);
         }
         // if (characters[0].url != "" && characters[0].url != url) { seturl(characters[0].url) }
@@ -33,9 +33,20 @@ const File = () => {
     const handleUpload = async () => {
         // Perform upload logic here using selectedFile
         setmessage("Loading...");
+
         if (selectedFile) {
-            console.log('Uploading file', selectedFile);
+            // const unixPath = selectedFile.replace(/\\/g, "/").replace(/^['"]|['"]$/g, '').replace(/['"]/g, '');
+            // console.log(unixPath);
+            // console.log(unixPath);
+            // console.log(unixPath);
+            // console.log(unixPath);
+            // console.log(unixPath);
+            // console.log(unixPath);
+            // console.log(unixPath);
+            // console.log(unixPath);
             // Example: uploadFile(selectedFile);
+            setSelectedFile(selectedFile)
+            console.log('Uploading file', selectedFile);
         } else {
             console.log('No file selected.');
         }

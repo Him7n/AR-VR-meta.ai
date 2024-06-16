@@ -7,8 +7,8 @@ import { TalkAtom } from '../Utils/TalkAtom';
 const MessageBox = () => {
   const [message, setMessage] = useAtom(AiMessageAtom);
   const [talk] = useAtom(TalkAtom);
-  console.log(message);
-console.log(talk);
+//   console.log(message);
+// console.log(talk);
   return (
     <>
       <Html transform occlude={'blending'} zIndexRange={[10, 1]} position={[-23.65, 2.5, -3.5]} rotation-y={Math.PI / 2}

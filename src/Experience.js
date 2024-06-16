@@ -54,6 +54,13 @@ import FileSchool from './Component/FileSchool.js'
 import SelectiveRenderInsideTheater from './Component/SelectiveRenderInsideTheater.js'
 import VenueFile from './Component/VenueFile.js'
 import { GoupAtom } from './Utils/GoUP.js'
+import Gate1 from './Models/Gate1.js'
+import Gate4 from './Models/Gate4.js'
+import Gate3 from './Models/Gate3.js'
+import Gate2 from './Models/Gate2.js'
+import Gate5 from './Models/Gate5.js'
+import Gate6 from './Models/Gate6.js'
+import Gate7 from './Models/Gate7.js'
 THREE.ColorManagement.legacyMode = false;
 
 
@@ -128,8 +135,8 @@ export default function Experience() {
     const enterTheater = [38, 1, 89];
     const targetCoordinates2 = [50, 1, -130]
     const aiTarget = [-23, 1, -5];
-    const aiTarget2 = [63, 1, -25];
-    const upTarget = [30, 1, -138] ;
+    const aiTarget2 = [67, 1, -25];
+    const upTarget = [30, 1, -138];
     const isWithinDistance = Distanceto(targetCoordinates);
     const isWithinDistance2 = Distanceto(targetCoordinates2);
     if (isWithinDistance || isWithinDistance2) {
@@ -197,19 +204,19 @@ export default function Experience() {
     // console.log(characters);
     // console.log(characters.length);
 
-const UP  = Distanceto(upTarget)
-if(UP){
+    const UP = Distanceto(upTarget)
+    if (UP) {
 
-    if(!_up){
-setup(true);
-console.log('upuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuup')
-    }
-}else{
-    if(_up){
-        setup(false)
-    }
+        if (!_up) {
+            setup(true);
+            console.log('upuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuup')
+        }
+    } else {
+        if (_up) {
+            setup(false)
+        }
 
-}
+    }
     return <>
         {/* <PointerLockControls  /> */}
 
@@ -264,6 +271,72 @@ console.log('upuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuup')
                 // Offsets the virtual camera that projects the reflection. Useful when the reflective surface is some distance from the object's origin (default = 0)
                 />
             </mesh>
+            <mesh receiveShadow
+                position={[30, -0.9, -138]}
+                rotation-x={- Math.PI * 0.5}  >
+                <planeGeometry />
+                <meshNormalMaterial />
+
+
+            </mesh>
+            <mesh receiveShadow
+                position={[1, -0.9, -13]}
+                rotation-x={- Math.PI * 0.5}  >
+                <planeGeometry />
+                <meshNormalMaterial />
+
+
+            </mesh>
+            <mesh receiveShadow
+                position={[55, -0.9, 2]}
+                rotation-x={- Math.PI * 0.5}  >
+                <planeGeometry />
+                <meshNormalMaterial />
+
+
+            </mesh>
+            <mesh receiveShadow
+                position={[50, -0.9, -130]}
+                rotation-x={- Math.PI * 0.5}  >
+                <planeGeometry />
+                <meshNormalMaterial />
+
+
+            </mesh>
+            <mesh receiveShadow
+                position={[1, -0.9, -13]}
+                rotation-x={- Math.PI * 0.5}  >
+                <planeGeometry />
+                <meshNormalMaterial />
+
+
+            </mesh>
+            <mesh receiveShadow
+                position={[65, -0.9, 85]}
+                rotation-x={- Math.PI * 0.5}  >
+                <planeGeometry />
+                <meshNormalMaterial />
+
+
+            </mesh>
+            <mesh receiveShadow
+                position={[38, -0.9, 89]}
+                rotation-x={- Math.PI * 0.5}  >
+                <planeGeometry />
+                <meshNormalMaterial />
+
+
+            </mesh>
+            <mesh receiveShadow
+                position={[67, -0.9, -25]}
+                rotation-x={- Math.PI * 0.5}  >
+                <planeGeometry />
+                <meshNormalMaterial />
+
+
+            </mesh>
+
+
             <Office />
             <Venue />
             <VenueFile />
@@ -278,9 +351,16 @@ console.log('upuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuup')
             {/* <Room /> */}
             <Cinema />
             <TicketBooth />
-            <primitive object={hamburger.scene} scale={0.1} />
             <TheatreStage />
             <WhiteRoom />
+            <Gate1/>
+            <Gate2/>
+            <Gate3/>
+            <Gate4/>
+            <Gate5/>
+            <Gate6/>
+            <Gate7/>
+            
             {/* <DoubtPanel /> */}
             <Classroom />
             {/* <Presentationiframe / */}

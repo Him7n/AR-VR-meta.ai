@@ -9,6 +9,8 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
 from dotenv import load_dotenv
+import pyttsx3
+text_speech = pyttsx3.init()
 # import os
 # from PyPDF2 import PdfReader
 # from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -72,6 +74,9 @@ def get_conversational_chain():
     return chain
 ALLOWED_FILENAME = "lecture1.pdf"
 
+
+
+
 @app.post("/process_pdf/")
 async def process_pdf(file_path: str = Form(...)):
     print("file_path: ", file_path)
@@ -105,6 +110,10 @@ async def process_pdf(file_path: str = Form(...)):
 #     return JSONResponse(content={"answer": response["output_text"]})
 
 
+def sayyy(answer):
+  text_speech.say(answer) 
+  text_speech.runAndWait()
+
 @app.post("/answer_question/")
 async def answer_question(question: str = Form(...)):
     print(question);
@@ -123,7 +132,8 @@ async def answer_question(question: str = Form(...)):
     docs = new_db.similarity_search(question)
     chain = get_conversational_chain()
     response = chain({"input_documents": docs, "question": question}, return_only_outputs=True)
-
+    print(response["output_text"]);
+    sayyy(response["output_text"]);
     return JSONResponse(content={"answer": response["output_text"]})
 if __name__ == "__main__":
     import uvicorn

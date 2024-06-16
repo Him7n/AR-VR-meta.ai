@@ -24,3 +24,7 @@ body,
   z-index: 9999; /* Ensure button is above other elements */
   /* Add more styling as needed */
 }
+::-webkit-scrollbar {
+  display: none;
+}
+

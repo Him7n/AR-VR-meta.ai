@@ -29,9 +29,9 @@ export const P = (props) => {
     const animations = useAnimations(ani, model)
 
 
-    const { animationName } = useControls({
-        animationName: { options: animations.names }
-    })
+    // const { animationName } = useControls({
+    //     animationName: { options: animations.names }
+    // })
 
     useEffect(() => {
         const action = animations.actions[currentAnimation]

@@ -41,7 +41,8 @@ const UpMenu = () => {
 // setup(true);
         socket.emit('position', {
             x: x,
-            y: 1.5,
+            y: 1.5
+            ,
             z: z,
         });
         console.log(x,y,z)
