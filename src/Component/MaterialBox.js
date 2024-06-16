@@ -38,7 +38,7 @@ const MaterialBox = () => {
     };
 
     return (
-        <div className="flex absolute left-[8rem] bottom-2 h-auto w-36 bg-slate-800/5 flex-col shadow-2xl items-center justify-center gap-y-2">
+        <div className="flex transition-all absolute z-10 left-[8rem] bottom-2 h-auto w-36 bg-slate-800/5 flex-col shadow-2xl items-center justify-center gap-y-2">
             <div className="mt-1">
                 <div className="flex max-h-[300px] w-full flex-col overflow-y-auto">
                     {materials.map((material, id) => (

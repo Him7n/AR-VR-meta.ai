@@ -3,21 +3,23 @@ import { Findme } from '../Utils/Findme'
 import { useAtom } from 'jotai'
 import { useState } from 'react'
 import Contentbox from './Contentbox'
-import OfficeContentbox from './OfficeContentbox'
-const SelectiveRender = () => {
+import UplaodOffice from './UplaodOffice'
+import UploadClass from '../Pages/UploadClass'
+import { Html } from '@react-three/drei'
+const SelectiveRenderInside2 = () => {
     const [me] = useAtom(Findme)
     const [show, setShow] = useState(false)
     console.log(me)
     if (me != null) {
 
-        if (me.role == 'presentee') {
+        if (me.role == 'teacher') {
             if (!show) {
 
 
                 setShow(true);
             }
-            console.log("you are a presentee")
-        } else  {
+            console.log("you are a Teacher")
+        } else {
             if (show) {
                 setShow(false);
             }
@@ -32,11 +34,11 @@ const SelectiveRender = () => {
         <>
             {
 
-                show && <OfficeContentbox />
+                show && <UploadClass/>
             }
         </>
 
     )
 }
 
-export default SelectiveRender
+export default SelectiveRenderInside2

@@ -39,6 +39,8 @@ import { OfficeMenuatom } from './Utils/OfficeMenuatom.js'
 import SelectiveRender from './Component/SelectiveRender.js'
 import SelectiveRenderInside from './Component/SelectiveRenderInside.js'
 import UplaodOffice from './Component/UplaodOffice.js'
+import { ClassMenuatom } from './Utils/ClassMenuatom.js'
+import SelectiveRenderInside2 from './Component/SelectiveRenderInside2.js'
 THREE.ColorManagement.legacyMode = false;
 
 
@@ -100,10 +102,11 @@ export default function Experience() {
 
 
     const [_officeMenu, setOfficeMenu] = useAtom(OfficeMenuatom);
+    const [_classMenu, setClassMenu] = useAtom(ClassMenuatom);
     //
     const [menu1, setMenu1] = useState(false);
     const targetCoordinates = [1, 0, -13];
-
+    const SchoolTarget = [85, 1, 1];
     const isWithinDistance = Distanceto(targetCoordinates);
 
     if (isWithinDistance) {
@@ -113,7 +116,21 @@ export default function Experience() {
     } else {
         if (_officeMenu) { setOfficeMenu(false) }
     }
-
+    const schoolDistance = Distanceto(SchoolTarget);
+    if (schoolDistance) {
+        console.log(
+            "class reached"
+        )
+        console.log(_classMenu)
+        if (!_classMenu) {
+            setClassMenu(true);
+        }
+    } else {
+        console.log(
+            "class not reached"
+        )
+        if (_classMenu) { setClassMenu(false) }
+    }
 
     //
     // console.log(`my socket id ${socket.id}`)
@@ -139,7 +156,7 @@ export default function Experience() {
 
 
             {/* <Player/> */}
-            <mesh castShadow position-x={2} scale={1.5}>
+            <mesh castShadow position={[85, 1, 1]} scale={1.5}>
                 <boxGeometry />
                 <meshStandardMaterial color="mediumpurple" />
             </mesh>
@@ -152,7 +169,7 @@ export default function Experience() {
 
             {/* {isWithinDistance && } */}
 
-
+            <SelectiveRenderInside2 />
 
             //-----------------
 
@@ -175,7 +192,7 @@ export default function Experience() {
             </mesh>
             <Office />
             <Venue />
-            
+
             <SelectiveRenderInside />
             {/* {menu1 && < MenuOffice />} */}
             {/* <Room /> */}

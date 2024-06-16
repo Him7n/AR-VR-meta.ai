@@ -16,6 +16,8 @@ import VoiceChat from './VoiceChat.js';
 import MenuOffice from '../Component/MenuOffice.js';
 import SelectiveRender from '../Component/SelectiveRender.js';
 import ShowModel from '../Component/ShowModel.js';
+import MenuClass from '../Component/MenuClass.js';
+import SelectiveRenderClass from '../Component/SelectiveRenderClass.js';
 const Enviroment = () => {
     const response = Authorize();
     if (response != null) {
@@ -37,10 +39,11 @@ const Enviroment = () => {
                 ]}
             >
                 <MenuOffice />
+                <MenuClass />
                 <DoubtPanel />
                 <Doubt />
                 <SelectiveRender />
-                <ShowModel />
+                <SelectiveRenderClass />
                 <Sidebar />
                 <Products />
                 <VRButton />

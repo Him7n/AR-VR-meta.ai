@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Switchpanel from './Switchpanel';
 import MaterialBox from './MaterialBox';
 import OfficeSwitchpanel from './OfficeSwitchpanel';
+import ModelBox from './ModelBox';
 const OfficeContentbox = () => {
     const [activeForm, setActiveForm] = useState('form1');
     const renderActiveForm = () => {
@@ -12,9 +13,9 @@ const OfficeContentbox = () => {
             case 'form1':
                 return <MaterialBox />;
             case 'form2':
-                return <MaterialBox />;
+                return <ModelBox />;
             case 'form3':
-                return <MaterialBox />
+                return null
             // Add cases for other forms
             default:
                 return null

@@ -4,20 +4,20 @@ import { useAtom } from 'jotai'
 import { useState } from 'react'
 import Contentbox from './Contentbox'
 import OfficeContentbox from './OfficeContentbox'
-const SelectiveRender = () => {
+const SelectiveRenderClass = () => {
     const [me] = useAtom(Findme)
     const [show, setShow] = useState(false)
     console.log(me)
     if (me != null) {
 
-        if (me.role == 'presentee') {
+        if (me.role == 'student') {
             if (!show) {
 
 
                 setShow(true);
             }
             console.log("you are a presentee")
-        } else  {
+        } else {
             if (show) {
                 setShow(false);
             }
@@ -32,11 +32,11 @@ const SelectiveRender = () => {
         <>
             {
 
-                show && <OfficeContentbox />
+                show && <Contentbox/>
             }
         </>
 
     )
 }
 
-export default SelectiveRender
+export default SelectiveRenderClass
