@@ -13,20 +13,29 @@ import VoiceChat from '../Pages/VoiceChat';
 import ProcessML from '../Component/ProcessML';
 import AskaiInput from '../Component/AskaiInput';
 import MessageBox from '../Component/MessageBox';
+import Doubt from '../Component/Doubt';
+import DoubtPanel from '../Component/DoubtPanel';
+import { SocketManager } from '../Socketmanager';
+import UploadAssignment from '../Pages/UploadAssignment';
+import UploadClass from '../Pages/UploadClass';
 
 const AppRoutes = () => {
     return (
-        <Router>
-            <Routes>
-                <Route element={<Enviroment />} path='/' />
-                <Route element={<MessageBox />} path='/vc' />
-                
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/signin" element={<Signin />} />
-                <Route path="/user/product" element={<Item />} />
-                {/* <Route element={<ArCube />} path='/xr' /> */}
-            </Routes>
-        </Router>
+        <>
+            <SocketManager />
+            <Router>
+                <Routes>
+                    <Route element={<Enviroment />} path='/' />
+                    <Route element={<UploadClass />} path='/vc' />
+                    <Route element={<DoubtPanel />} path='/dc' />
+
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/signin" element={<Signin />} />
+                    <Route path="/user/product" element={<Item />} />
+                    {/* <Route element={<ArCube />} path='/xr' /> */}
+                </Routes>
+            </Router>
+        </>
     )
 }
 

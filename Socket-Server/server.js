@@ -41,7 +41,9 @@ io.on("connection", (socket) => {
     avatar: 0,
     animation: '',
     url: '',
+    doubt:false,
     position: generateRandomPosition(),
+    assignments: []
   });
   io.to('gameRoom').emit("spawn", characters);
   // socket.on("user:call", ({ to, offer }) => {
@@ -91,6 +93,20 @@ io.on("connection", (socket) => {
     const character = characters.find((character) => character.id === socket.id);
     if (character) {
       character.animation = animation.animation;
+      io.to('gameRoom').emit("spawn", characters);
+    }
+  });
+  socket.on("Doubt", (raise) => {
+    const character = characters.find((character) => character.id === socket.id);
+    if (character) {
+      character.doubt = raise
+      io.to('gameRoom').emit("spawn", characters);
+    }
+  });
+  socket.on("resolve", (id) => {
+    const character = characters.find((character) => character.id === id);
+    if (character) {
+      character.doubt = false
       io.to('gameRoom').emit("spawn", characters);
     }
   });

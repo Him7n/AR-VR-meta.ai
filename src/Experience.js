@@ -30,6 +30,9 @@ import Cinema from './Models/Cinema.js'
 import ThreatreScreen from './Iframe/ThreatreScreen.js'
 import Banner from './Models/Banner.js'
 import TicketBooth from './Models/TicketBooth.js'
+import Classroom from './Models/Classroom.js'
+import DoubtPanel from './Component/DoubtPanel.js'
+import Doubt from './Component/Doubt.js'
 THREE.ColorManagement.legacyMode = false;
 
 
@@ -121,6 +124,7 @@ export default function Experience() {
             {/* <P2/> */}
 
             <Shop />
+          
             <mesh receiveShadow position-y={- 1} rotation-x={- Math.PI * 0.5} scale={300}>
                 <planeGeometry />
                 <MeshReflectorMaterial
@@ -143,13 +147,15 @@ export default function Experience() {
             {/* <Room /> */}
             <Cinema />
             <TicketBooth />
-            <primitive object={hamburger.scene} scale={1} />
+            <primitive object={hamburger.scene} scale={0.1} />
             <TheatreStage />
             <WhiteRoom />
+            {/* <DoubtPanel /> */}
+            <Classroom />
             {/* <Presentationiframe / */}
             <Banner />
             {/* <primitive object={wilow} scale={1} /> */}
-            <SocketManager />
+            {/* <SocketManager /> */}
             {/* <VoiceChat/> */}
             {/* <Player2/> */}
         </Physics>

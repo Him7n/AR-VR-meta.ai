@@ -8,6 +8,8 @@ import { FlyControls, KeyboardControls, Sky } from '@react-three/drei';
 import { PointerLockControls } from '@react-three/drei';
 import { Html } from '@react-three/drei';
 import { Controllers, Hands, XRButton, XR, VRButton, ARButton } from '@react-three/xr';
+import DoubtPanel from '../Component/DoubtPanel.js';
+import Doubt from '../Component/Doubt.js';
 import Authorize from '../Component/Authorize.js';
 import Sidebar from '../Component/Sidebar.js';
 import VoiceChat from './VoiceChat.js';
@@ -31,6 +33,8 @@ const Enviroment = () => {
 
                 ]}
             >
+                <DoubtPanel />
+                <Doubt />
                 <Sidebar />
                 <Products />
                 <VRButton />
