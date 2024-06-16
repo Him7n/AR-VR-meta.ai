@@ -1,6 +1,9 @@
 import { Html } from '@react-three/drei'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useAtom } from 'jotai';
 import OfficeIframe from './OfficeIframe'; import axios from "axios";
+import { socket, charactersAtom } from '../Socketmanager'
+import { _checkPlugin } from 'gsap/gsap-core';
 
 const File = () => {
     const [selectedFile, setSelectedFile] = useState(null);
@@ -8,6 +11,20 @@ const File = () => {
     const [message, setmessage] = useState(null)
     const [loading, setLoading] = useState(true);
     const [show, setShow] = useState(false);
+
+
+    // if (character.url != "") { seturl(character.url) }
+    console.log(url);
+    const [characters] = useAtom(charactersAtom);
+    if (characters[0]) {
+        if(characters[0].url!= "" && characters[0].url != url){
+            seturl(characters[0].url);
+        }
+        // if (characters[0].url != "" && characters[0].url != url) { seturl(characters[0].url) }
+        // console.log(url);
+    }
+    // console.log(me);
+
     const handleFileChange = (e) => {
         const file = e.target.value;
         setSelectedFile(file);
@@ -33,6 +50,12 @@ const File = () => {
             setmessage("File uploaded");
             seturl(`http://localhost:3002/${response.data.filename}`);
             console.log(url);
+            const joiner = response.data.filename;
+            console.log(joiner);
+            console.log("http://localhost:3002/" + joiner);
+            const final = "http://localhost:3002/" + joiner
+            socket.emit("url", final);
+            // console.log(url);
             setShow(true);
             setLoading(false);
         }

@@ -40,6 +40,7 @@ io.on("connection", (socket) => {
     rotation: 0,
     avatar: 0,
     animation: '',
+    url: '',
     position: generateRandomPosition(),
   });
   io.to('gameRoom').emit("spawn", characters);
@@ -76,6 +77,15 @@ io.on("connection", (socket) => {
       character.delta = [delta.x, delta.y, delta.z];
       io.to('gameRoom').emit("spawn", characters);
     }
+  });
+  socket.on("url", (url) => {
+    characters.forEach((character) => {
+
+      character.url = url;
+
+    });
+
+    io.to('gameRoom').emit("spawn", characters);
   });
   socket.on("animation", (animation) => {
     const character = characters.find((character) => character.id === socket.id);
