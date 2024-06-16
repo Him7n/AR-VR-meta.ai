@@ -183,7 +183,7 @@ router.post('/upload', async (req, res) => {
 });
 
 router.get('/askai', async (req, res) => {
-    const pathtofile = "/home/lildicky/Dracut-x12/backend/routes/Pdf.pdf";
+    const pathtofile = "public/lecture.pdf";
     const response = await askai(pathtofile);
     res.json({
         message: "ai responded!",
