@@ -7,6 +7,7 @@ import Player from './Player.js'
 import * as THREE from 'three';
 import Player2 from './Player2.js';
 import { SocketManager, charactersAtom, socket } from './Socketmanager.js';
+import Distanceto from './Component/Distanceto.js'
 import { useFBX } from '@react-three/drei'
 import Cordinates from './Utils/Cordinates.js';
 import TheatreStage from './Models/TheatreStage.js'
@@ -33,6 +34,11 @@ import TicketBooth from './Models/TicketBooth.js'
 import Classroom from './Models/Classroom.js'
 import DoubtPanel from './Component/DoubtPanel.js'
 import Doubt from './Component/Doubt.js'
+// import MenuOffice from './Component/MenuOffice.js'
+import { OfficeMenuatom } from './Utils/OfficeMenuatom.js'
+import SelectiveRender from './Component/SelectiveRender.js'
+import SelectiveRenderInside from './Component/SelectiveRenderInside.js'
+import UplaodOffice from './Component/UplaodOffice.js'
 THREE.ColorManagement.legacyMode = false;
 
 
@@ -93,6 +99,23 @@ export default function Experience() {
     //--
 
 
+    const [_officeMenu, setOfficeMenu] = useAtom(OfficeMenuatom);
+    //
+    const [menu1, setMenu1] = useState(false);
+    const targetCoordinates = [1, 0, -13];
+
+    const isWithinDistance = Distanceto(targetCoordinates);
+
+    if (isWithinDistance) {
+        if (!_officeMenu) {
+            setOfficeMenu(true);
+        }
+    } else {
+        if (_officeMenu) { setOfficeMenu(false) }
+    }
+
+
+    //
     // console.log(`my socket id ${socket.id}`)
     // console.log(characters);
     // console.log(characters.length);
@@ -124,7 +147,15 @@ export default function Experience() {
             {/* <P2/> */}
 
             <Shop />
-          
+
+            // menus---------------
+
+            {/* {isWithinDistance && } */}
+
+
+
+            //-----------------
+
             <mesh receiveShadow position-y={- 1} rotation-x={- Math.PI * 0.5} scale={300}>
                 <planeGeometry />
                 <MeshReflectorMaterial
@@ -144,6 +175,9 @@ export default function Experience() {
             </mesh>
             <Office />
             <Venue />
+            
+            <SelectiveRenderInside />
+            {/* {menu1 && < MenuOffice />} */}
             {/* <Room /> */}
             <Cinema />
             <TicketBooth />

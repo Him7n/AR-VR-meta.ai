@@ -16,6 +16,7 @@ import { P5 } from '../Models/P5';
 import { P3 } from '../Models/P3';
 import { LowPoly } from './LowPoly';
 import { Women1 } from '../Models/Women1';
+import { Findme } from './Findme';
 
 const Cordinates = () => {
 
@@ -24,11 +25,15 @@ const Cordinates = () => {
   //----------
   // console.log(`my socket id ${socket.id}`);
   const [characters] = useAtom(charactersAtom);
+  const [me, setMe] = useAtom(Findme)
   // console.log(characters.length);
 
 
   characters.map((char) => {
+    if (char.id === socket.id) {
 
+      setMe(char)
+    }
     // console.log(char.position);
     // console.log(char.delta);
 

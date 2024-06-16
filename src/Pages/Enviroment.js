@@ -13,6 +13,9 @@ import Doubt from '../Component/Doubt.js';
 import Authorize from '../Component/Authorize.js';
 import Sidebar from '../Component/Sidebar.js';
 import VoiceChat from './VoiceChat.js';
+import MenuOffice from '../Component/MenuOffice.js';
+import SelectiveRender from '../Component/SelectiveRender.js';
+import ShowModel from '../Component/ShowModel.js';
 const Enviroment = () => {
     const response = Authorize();
     if (response != null) {
@@ -33,8 +36,11 @@ const Enviroment = () => {
 
                 ]}
             >
+                <MenuOffice />
                 <DoubtPanel />
                 <Doubt />
+                <SelectiveRender />
+                <ShowModel />
                 <Sidebar />
                 <Products />
                 <VRButton />

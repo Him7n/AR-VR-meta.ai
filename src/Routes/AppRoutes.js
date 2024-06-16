@@ -18,6 +18,10 @@ import DoubtPanel from '../Component/DoubtPanel';
 import { SocketManager } from '../Socketmanager';
 import UploadAssignment from '../Pages/UploadAssignment';
 import UploadClass from '../Pages/UploadClass';
+import AssignmentBox from '../Component/AssignmentBox';
+import Contentbox from '../Component/Contentbox';
+import MenuOffice from '../Component/MenuOffice';
+import ShowModel from '../Component/ShowModel';
 
 const AppRoutes = () => {
     return (
@@ -27,12 +31,14 @@ const AppRoutes = () => {
                 <Routes>
                     <Route element={<Enviroment />} path='/' />
                     <Route element={<UploadClass />} path='/vc' />
-                    <Route element={<DoubtPanel />} path='/dc' />
+                    <Route element={<Contentbox />} path='/dc' />
+                    <Route element={<MenuOffice />} path='/pc' />
+                    <Route element={<ShowModel />} path='/sc' />
 
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/signin" element={<Signin />} />
                     <Route path="/user/product" element={<Item />} />
-                    {/* <Route element={<ArCube />} path='/xr' /> */}
+                    {/* <Route element={<ArCube />}  path='/xr' /> */}
                 </Routes>
             </Router>
         </>

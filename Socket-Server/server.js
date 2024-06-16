@@ -45,7 +45,8 @@ io.on("connection", (socket) => {
     position: generateRandomPosition(),
     assignments: [],
     materials: [],
-    models: []
+    models: [],
+    role : ' '
   });
   io.to('gameRoom').emit("spawn", characters);
   // socket.on("user:call", ({ to, offer }) => {
@@ -106,6 +107,14 @@ io.on("connection", (socket) => {
       io.to('gameRoom').emit("spawn", characters);
     }
   });
+  socket.on("role", (role) => {
+    console.log("doube raised")
+    const character = characters.find((character) => character.id === socket.id);
+    if (character) {
+      character.role = role
+      io.to('gameRoom').emit("spawn", characters);
+    }
+  });
   socket.on("resolve", (id) => {
     const character = characters.find((character) => character.id === id);
     if (character) {
@@ -121,7 +130,8 @@ io.on("connection", (socket) => {
         title: assign.title,
         description: assign.description,
         dueDate: assign.dueDate,
-        status: "pending"
+        status: "pending",
+        url : ""
       });
 
     })
@@ -144,7 +154,7 @@ io.on("connection", (socket) => {
     console.log(mod.link)
     characters.forEach((character) => {
 
-      character.materials.push({
+      character.models.push({
         title: mod.title,
         link: mod.link
       });
@@ -152,6 +162,24 @@ io.on("connection", (socket) => {
     })
     io.to('gameRoom').emit("spawn", characters);
 
+  });
+  socket.on("assignmentdone", (ass) => {
+    console.log(ass.link, ass.title);
+    const character = characters.find((character) => character.id === socket.id);
+    if (character) {
+      // Find the assignment with the specified title in the character's assignments array
+      const foundAssignment = character.assignments.find(
+        (assignment) => assignment.title === ass.title
+      );
+      if (foundAssignment) {
+        // Update assignment status or properties as needed
+        foundAssignment.status = "done";
+        foundAssignment.url = ass.link;
+
+        // Emit updated character state to the 'gameRoom'
+        io.to('gameRoom').emit("spawn", characters);
+      }
+    }
   });
   // socket.on("peer:nego:needed", ({ to, offer }) => {
   //   console.log("peer:nego:needed", offer);
