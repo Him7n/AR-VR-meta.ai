@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { socket } from '../Socketmanager';
 const UploadAssignment = () => {
     const [images, setImages] = useState([]);
     const [dueDate, setDueDate] = useState('');
@@ -43,6 +43,14 @@ const UploadAssignment = () => {
 
         console.log(title, discription, dueDate)
         // Handle form submission (e.g., send data to backend)
+        socket.emit("assignment", {
+
+            title: title,
+            discription: discription,
+            dueDate: dueDate
+        });
+
+
         console.log("Submitting form data:", { dueDate });
     };
 

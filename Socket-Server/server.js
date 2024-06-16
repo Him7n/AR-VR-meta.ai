@@ -41,9 +41,11 @@ io.on("connection", (socket) => {
     avatar: 0,
     animation: '',
     url: '',
-    doubt:false,
+    doubt: false,
     position: generateRandomPosition(),
-    assignments: []
+    assignments: [],
+    materials: [],
+    models: []
   });
   io.to('gameRoom').emit("spawn", characters);
   // socket.on("user:call", ({ to, offer }) => {
@@ -97,6 +99,7 @@ io.on("connection", (socket) => {
     }
   });
   socket.on("Doubt", (raise) => {
+    console.log("doube raised")
     const character = characters.find((character) => character.id === socket.id);
     if (character) {
       character.doubt = raise
@@ -109,6 +112,46 @@ io.on("connection", (socket) => {
       character.doubt = false
       io.to('gameRoom').emit("spawn", characters);
     }
+  });
+  socket.on("assignment", (assign) => {
+    console.log(assign)
+    characters.forEach((character) => {
+
+      character.assignments.push({
+        title: assign.title,
+        description: assign.description,
+        dueDate: assign.dueDate,
+        status: "pending"
+      });
+
+    })
+    io.to('gameRoom').emit("spawn", characters);
+
+  });
+  socket.on("material", (mat) => {
+    characters.forEach((character) => {
+
+      character.materials.push({
+        title: mat.title,
+        link: mat.link
+      });
+
+    })
+    io.to('gameRoom').emit("spawn", characters);
+
+  });
+  socket.on("model", (mod) => {
+    console.log(mod.link)
+    characters.forEach((character) => {
+
+      character.materials.push({
+        title: mod.title,
+        link: mod.link
+      });
+
+    })
+    io.to('gameRoom').emit("spawn", characters);
+
   });
   // socket.on("peer:nego:needed", ({ to, offer }) => {
   //   console.log("peer:nego:needed", offer);

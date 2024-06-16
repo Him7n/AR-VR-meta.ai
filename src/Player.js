@@ -281,7 +281,7 @@ const Player = ({ id, position, rotation, delta, aanimations }) => {
         /** Camera */
         // const bodyposition = body.current.translation();
         // console.log(bodyposition)
-        // const cameraposition = new THREE.Vector3();
+        // const cameraposition = new THREE.so kse();
         // cameraposition.copy(bodyposition);
         // cameraposition.z += 10;
         // cameraposition.y+=5;

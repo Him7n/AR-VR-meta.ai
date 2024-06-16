@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-
+import axios from 'axios';
+import { socket } from '../Socketmanager';
 const UploadModel = () => {
     const [title, setTitle] = useState('');
     const [link, setLink] = useState('');
     const [file, setFile] = useState(null);
+    const [status, setstatus] = useState(null);
+    const [load, setLoad] = useState(false);
 
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
@@ -18,10 +21,29 @@ const UploadModel = () => {
         setFile(selectedFile);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         console.log("Title:", title);
         console.log("Link:", link);
         console.log("File:", file);
+        setLoad(true);
+        setstatus("Loading...")
+        const response = await axios.post('http://localhost:3002/api/v1/user/upload', {
+            path: link
+
+        })
+        setstatus("Posted")
+        console.log(response.data.filename)
+        const name = response.data.filename;
+        console.log(name[0])
+        console.log("hihi")
+        const url = "http://localhost:3002/" + name[0];
+        console.log(url);
+        socket.emit('model', {
+            title: title,
+            link: url
+        })
+
+
         // Add code to handle form submission (e.g., send data to backend)
     };
 
@@ -55,6 +77,7 @@ const UploadModel = () => {
                     <div className="count ml-auto text-gray-400 text-xs font-semibold">0/300</div>
                 </div>
                 <div className="buttons flex justify-end">
+                    {load && <div className="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500">{status}</div>}
                     <div onClick={handleSubmit} className="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500">Post</div>
                 </div>
             </div>
