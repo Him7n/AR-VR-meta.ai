@@ -31,10 +31,10 @@ const AppRoutes = () => {
             <Router>
                 <Routes>
                     <Route element={<Enviroment />} path='/' />
-                    <Route element={<UploadClass />} path='/vc' />
+                    <Route element={<MessageBox />} path='/vc' />
                     <Route element={<Contentbox />} path='/dc' />
-                    <Route element={<MenuOffice />} path='/pc' />
-                    <Route element={<ShowModel />} path='/sc' />
+                    <Route element={<AskaiInput/>} path='/ai' />
+                    <Route element={<ProcessML />} path='/sc' />
                     <Route element={<ConnectMetamask />} path='/mc' />
 
                     <Route path="/signup" element={<Signup />} />

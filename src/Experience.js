@@ -43,6 +43,14 @@ import { ClassMenuatom } from './Utils/ClassMenuatom.js'
 import SelectiveRenderInside2 from './Component/SelectiveRenderInside2.js'
 import { TicketCheckatom } from './Utils/TicketCheckatom.js'
 import { TicketBuyMenuatom } from './Utils/TicketBuyMenuatom.js'
+import ProcessML from './Component/ProcessML.js'
+import MessageBox from './Component/MessageBox.js'
+import { AIshowatom } from './Utils/AIshowatom.js'
+import ProcessMLclassroom from './Component/ProcessMLclassroom.js'
+import MessageBoxclassroom from './Component/MessagBoxclassroom.js'
+import BotOffice from './Models/BotOffice.js'
+import BotClass from './Models/BotClass.js'
+import FileSchool from './Component/FileSchool.js'
 THREE.ColorManagement.legacyMode = false;
 
 
@@ -107,13 +115,17 @@ export default function Experience() {
     const [_officeMenu, setOfficeMenu] = useAtom(OfficeMenuatom);
     const [_classMenu, setClassMenu] = useAtom(ClassMenuatom);
     const [_ticketMenu,setTickerMenu] = useAtom(TicketBuyMenuatom);
+    const [_aishow,setAishow] = useAtom(AIshowatom)
 const[_checkticket,setCheckticket] = useAtom(TicketCheckatom)
     //
     const [menu1, setMenu1] = useState(false);
     const targetCoordinates = [1, 0, -13];
-    const SchoolTarget = [85, 1, 1];
+    const SchoolTarget =  [55, 1, 2];
     const ticketTarget = [65, 1, 85]
     const enterTheater = [38, 1, 89];
+    const aiTarget = [-23, 1, -5];
+    const aiTarget2 = [63, 1, -25];
+
     const isWithinDistance = Distanceto(targetCoordinates);
 
     if (isWithinDistance) {
@@ -163,6 +175,19 @@ if(enterT){
         setCheckticket(false)
     }
 }
+const isai = Distanceto(aiTarget);
+const isai2 = Distanceto(aiTarget2);
+if(isai || isai2 ){
+if(!_aishow){
+    setAishow(true);
+
+}
+}else{
+    if (_aishow) {
+        setAishow(false)
+
+    }
+}
     //
     // console.log(`my socket id ${socket.id}`)
     // console.log(characters);
@@ -187,7 +212,7 @@ if(enterT){
 
 
             {/* <Player/> */}
-            <mesh castShadow position={[38, 1, 89]} scale={1.5}>
+            <mesh castShadow position={[55, 1, 2]} scale={1.5}>
                 <boxGeometry />
                 <meshStandardMaterial color="mediumpurple" />
             </mesh>
@@ -201,6 +226,8 @@ if(enterT){
             {/* {isWithinDistance && } */}
 
             <SelectiveRenderInside2 />
+            <ProcessMLclassroom/>   
+            <MessageBoxclassroom/>
 
             //-----------------
 
@@ -223,7 +250,10 @@ if(enterT){
             </mesh>
             <Office />
             <Venue />
-
+            <ProcessML/>
+<MessageBox/>
+<BotOffice/>
+<BotClass/>
             <SelectiveRenderInside />
             {/* {menu1 && < MenuOffice />} */}
             {/* <Room /> */}
@@ -236,6 +266,7 @@ if(enterT){
             <Classroom />
             {/* <Presentationiframe / */}
             <Banner />
+            <FileSchool/>
             {/* <primitive object={wilow} scale={1} /> */}
             {/* <SocketManager /> */}
             {/* <VoiceChat/> */}

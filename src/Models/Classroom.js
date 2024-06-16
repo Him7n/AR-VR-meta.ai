@@ -6,7 +6,7 @@ const Classroom = () => {
 
 
     return (<>
-        <primitive position={[100, -1.4, 0]} rotation-y={3 * (Math.PI / 2)} object={classroom.scene} scale={2} />
+        <primitive position={[70, -1.4, 0]} rotation-y={3 * (Math.PI / 2)} object={classroom.scene} scale={2} />
 
     </>
     )

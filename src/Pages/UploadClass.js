@@ -23,7 +23,7 @@ const UploadClass = () => {
     };
     return (
 
-        <Html transform occlude={'blending'} zIndexRange={[10, 1]} position={[97, 2, 0]} rotation-y={(Math.PI) * 3 / 4}
+        <Html transform occlude={'blending'} zIndexRange={[10, 1]} position={[67, 2, 0]} rotation-y={(Math.PI) * 3 / 4}
             scale={0.1}  >
             <div className="container  mx-auto flex flex-col gap-3">
                 <FormNavbar setActiveForm={setActiveForm} />

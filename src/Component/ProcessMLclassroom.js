@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from "axios";
 import { Html } from '@react-three/drei';
-const ProcessML = () => {
+const ProcessMLclassroom = () => {
     const [path, setPath] = useState("");
     const HandleChange = (e) => {
         setPath(e.target.value);
@@ -31,7 +31,7 @@ const ProcessML = () => {
     }
     return (
         <>
-            <Html transform occlude={'blending'} zIndexRange={[10, 1]} position={[-24.65, 1.7, 0]} rotation-y={-(Math.PI/3)*4 }
+            <Html transform occlude={'blending'} zIndexRange={[10, 1]} position={[65, 1.7, -27.266]} rotation-y={Math.PI / 3}
                 scale={0.2}  >
                 <div className='border-2 bg-cyan-300  flex  flex-col align-middle justify-center  text-center gap-2 p-3 py-1 ' >
 
@@ -45,4 +45,4 @@ const ProcessML = () => {
     )
 }
 
-export default ProcessML
+export default ProcessMLclassroom
