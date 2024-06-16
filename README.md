@@ -106,11 +106,12 @@ We welcome contributions from developers, designers, and creators to enhance the
 ![image1](./images/Theater2.png)
 
 ## video
+![Youtube Walkthrough Video](https://www.youtube.com/watch?v=nwlWtFL1Gkg)
+
 
 ## Contract address
  0xD663f267A074CE8A3580872DbD953981F4d83029
- [tex(url) 
-
+https://sepolia.etherscan.io/address/0xd663f267a074ce8a3580872dbd953981f4d83029
 ## License
 Meta-AR-VR.ai is licensed under the MIT License. See the LICENSE file for details.
 
