@@ -113,7 +113,7 @@ We welcome contributions from developers, designers, and creators to enhance the
  ###2.run the app.py in Langchain-RAG-Server (`python app.py`)
  ###3.Run the index.js in the Backend (`nodemon index.js`)
  ###4.AR-server - do `npx vite --host` (AR depends on your PC's Compatiblity)
- ###5.Now just do `npm start` in the main directort
+ ###5.Now just do `npm run dev` in the main directort
  ###6.For Threter you must have `ErsatzTV` setup IPTV server or A Jellyfin server.
 
 ## Contract address
