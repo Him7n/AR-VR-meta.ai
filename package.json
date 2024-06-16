@@ -19,6 +19,7 @@
     "@react-three/rapier": "^1.1.1",
     "@react-three/xr": "^5.7.1",
     "cors": "^2.8.5",
+    "ethers": "^5.7.2",
     "gsap": "^3.12.5",
     "jotai": "^2.6.4",
     "leva": "^0.9.35",

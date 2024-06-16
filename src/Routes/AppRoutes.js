@@ -22,6 +22,7 @@ import AssignmentBox from '../Component/AssignmentBox';
 import Contentbox from '../Component/Contentbox';
 import MenuOffice from '../Component/MenuOffice';
 import ShowModel from '../Component/ShowModel';
+import ConnectMetamask from '../Pages/ConnectMetamask';
 
 const AppRoutes = () => {
     return (
@@ -34,6 +35,7 @@ const AppRoutes = () => {
                     <Route element={<Contentbox />} path='/dc' />
                     <Route element={<MenuOffice />} path='/pc' />
                     <Route element={<ShowModel />} path='/sc' />
+                    <Route element={<ConnectMetamask />} path='/mc' />
 
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/signin" element={<Signin />} />

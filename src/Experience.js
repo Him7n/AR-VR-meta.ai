@@ -41,6 +41,8 @@ import SelectiveRenderInside from './Component/SelectiveRenderInside.js'
 import UplaodOffice from './Component/UplaodOffice.js'
 import { ClassMenuatom } from './Utils/ClassMenuatom.js'
 import SelectiveRenderInside2 from './Component/SelectiveRenderInside2.js'
+import { TicketCheckatom } from './Utils/TicketCheckatom.js'
+import { TicketBuyMenuatom } from './Utils/TicketBuyMenuatom.js'
 THREE.ColorManagement.legacyMode = false;
 
 
@@ -100,13 +102,18 @@ export default function Experience() {
     })
     //--
 
+    // const []
 
     const [_officeMenu, setOfficeMenu] = useAtom(OfficeMenuatom);
     const [_classMenu, setClassMenu] = useAtom(ClassMenuatom);
+    const [_ticketMenu,setTickerMenu] = useAtom(TicketBuyMenuatom);
+const[_checkticket,setCheckticket] = useAtom(TicketCheckatom)
     //
     const [menu1, setMenu1] = useState(false);
     const targetCoordinates = [1, 0, -13];
     const SchoolTarget = [85, 1, 1];
+    const ticketTarget = [65, 1, 85]
+    const enterTheater = [38, 1, 89];
     const isWithinDistance = Distanceto(targetCoordinates);
 
     if (isWithinDistance) {
@@ -132,6 +139,30 @@ export default function Experience() {
         if (_classMenu) { setClassMenu(false) }
     }
 
+    const arewethereyet = Distanceto(ticketTarget)
+    
+    if(arewethereyet){
+        if(!_ticketMenu){
+setTickerMenu(true);
+        }
+}else{
+    if(_ticketMenu){ setTickerMenu(false)  }
+}
+
+const enterT = Distanceto(enterTheater)
+
+if(enterT){
+
+    if(!_checkticket){
+        setCheckticket(true)
+    }
+
+}else{
+
+    if(_checkticket){
+        setCheckticket(false)
+    }
+}
     //
     // console.log(`my socket id ${socket.id}`)
     // console.log(characters);
@@ -156,7 +187,7 @@ export default function Experience() {
 
 
             {/* <Player/> */}
-            <mesh castShadow position={[85, 1, 1]} scale={1.5}>
+            <mesh castShadow position={[38, 1, 89]} scale={1.5}>
                 <boxGeometry />
                 <meshStandardMaterial color="mediumpurple" />
             </mesh>
