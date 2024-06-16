@@ -51,6 +51,9 @@ import MessageBoxclassroom from './Component/MessagBoxclassroom.js'
 import BotOffice from './Models/BotOffice.js'
 import BotClass from './Models/BotClass.js'
 import FileSchool from './Component/FileSchool.js'
+import SelectiveRenderInsideTheater from './Component/SelectiveRenderInsideTheater.js'
+import VenueFile from './Component/VenueFile.js'
+import { GoupAtom } from './Utils/GoUP.js'
 THREE.ColorManagement.legacyMode = false;
 
 
@@ -111,24 +114,25 @@ export default function Experience() {
     //--
 
     // const []
-
+    const [_up, setup] = useAtom(GoupAtom)
     const [_officeMenu, setOfficeMenu] = useAtom(OfficeMenuatom);
     const [_classMenu, setClassMenu] = useAtom(ClassMenuatom);
-    const [_ticketMenu,setTickerMenu] = useAtom(TicketBuyMenuatom);
-    const [_aishow,setAishow] = useAtom(AIshowatom)
-const[_checkticket,setCheckticket] = useAtom(TicketCheckatom)
+    const [_ticketMenu, setTickerMenu] = useAtom(TicketBuyMenuatom);
+    const [_aishow, setAishow] = useAtom(AIshowatom)
+    const [_checkticket, setCheckticket] = useAtom(TicketCheckatom)
     //
     const [menu1, setMenu1] = useState(false);
     const targetCoordinates = [1, 0, -13];
-    const SchoolTarget =  [55, 1, 2];
+    const SchoolTarget = [55, 1, 2];
     const ticketTarget = [65, 1, 85]
     const enterTheater = [38, 1, 89];
+    const targetCoordinates2 = [50, 1, -130]
     const aiTarget = [-23, 1, -5];
     const aiTarget2 = [63, 1, -25];
-
+    const upTarget = [30, 1, -138] ;
     const isWithinDistance = Distanceto(targetCoordinates);
-
-    if (isWithinDistance) {
+    const isWithinDistance2 = Distanceto(targetCoordinates2);
+    if (isWithinDistance || isWithinDistance2) {
         if (!_officeMenu) {
             setOfficeMenu(true);
         }
@@ -152,48 +156,60 @@ const[_checkticket,setCheckticket] = useAtom(TicketCheckatom)
     }
 
     const arewethereyet = Distanceto(ticketTarget)
-    
-    if(arewethereyet){
-        if(!_ticketMenu){
-setTickerMenu(true);
+
+    if (arewethereyet) {
+        if (!_ticketMenu) {
+            setTickerMenu(true);
         }
-}else{
-    if(_ticketMenu){ setTickerMenu(false)  }
-}
-
-const enterT = Distanceto(enterTheater)
-
-if(enterT){
-
-    if(!_checkticket){
-        setCheckticket(true)
+    } else {
+        if (_ticketMenu) { setTickerMenu(false) }
     }
 
-}else{
+    const enterT = Distanceto(enterTheater)
 
-    if(_checkticket){
-        setCheckticket(false)
+    if (enterT) {
+
+        if (!_checkticket) {
+            setCheckticket(true)
+        }
+
+    } else {
+
+        if (_checkticket) {
+            setCheckticket(false)
+        }
     }
-}
-const isai = Distanceto(aiTarget);
-const isai2 = Distanceto(aiTarget2);
-if(isai || isai2 ){
-if(!_aishow){
-    setAishow(true);
+    const isai = Distanceto(aiTarget);
+    const isai2 = Distanceto(aiTarget2);
+    if (isai || isai2) {
+        if (!_aishow) {
+            setAishow(true);
 
-}
-}else{
-    if (_aishow) {
-        setAishow(false)
+        }
+    } else {
+        if (_aishow) {
+            setAishow(false)
 
+        }
     }
-}
     //
     // console.log(`my socket id ${socket.id}`)
     // console.log(characters);
     // console.log(characters.length);
 
+const UP  = Distanceto(upTarget)
+if(UP){
 
+    if(!_up){
+setup(true);
+console.log('upuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuup')
+    }
+}else{
+    if(_up){
+        setup(false)
+    }
+
+}
     return <>
         {/* <PointerLockControls  /> */}
 
@@ -212,7 +228,7 @@ if(!_aishow){
 
 
             {/* <Player/> */}
-            <mesh castShadow position={[55, 1, 2]} scale={1.5}>
+            <mesh castShadow position={[30, 1, -138]} scale={1.5}>
                 <boxGeometry />
                 <meshStandardMaterial color="mediumpurple" />
             </mesh>
@@ -226,8 +242,8 @@ if(!_aishow){
             {/* {isWithinDistance && } */}
 
             <SelectiveRenderInside2 />
-            <ProcessMLclassroom/>   
-            <MessageBoxclassroom/>
+            <ProcessMLclassroom />
+            <MessageBoxclassroom />
 
             //-----------------
 
@@ -250,10 +266,13 @@ if(!_aishow){
             </mesh>
             <Office />
             <Venue />
-            <ProcessML/>
-<MessageBox/>
-<BotOffice/>
-<BotClass/>
+            <VenueFile />
+
+            <ProcessML />
+            <MessageBox />
+            <BotOffice />
+            <BotClass />
+            <SelectiveRenderInsideTheater />
             <SelectiveRenderInside />
             {/* {menu1 && < MenuOffice />} */}
             {/* <Room /> */}
@@ -266,7 +285,7 @@ if(!_aishow){
             <Classroom />
             {/* <Presentationiframe / */}
             <Banner />
-            <FileSchool/>
+            <FileSchool />
             {/* <primitive object={wilow} scale={1} /> */}
             {/* <SocketManager /> */}
             {/* <VoiceChat/> */}

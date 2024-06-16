@@ -18,6 +18,8 @@ import { useFrame, useThree } from '@react-three/fiber'
 // import { useRef } from 'react'
 import { useState, useEffect } from 'react'
 import { Text } from '@react-three/drei'
+// import { upAtom } from '../Utils/upatom';
+
 // import { updateCamera } from '@react-three/fiber/dist/declarations/src/core/utils'
 
 
@@ -25,7 +27,7 @@ import { Text } from '@react-three/drei'
 
 const Player = ({ id, position, rotation, delta, aanimations }) => {
 
-
+// const [_up] = useAtom(upAtom)
 
 
     const [showmenuAtom, setShowMenuAtom] = useAtom(menuAtom)
@@ -419,6 +421,7 @@ const Player = ({ id, position, rotation, delta, aanimations }) => {
             z: body.current.position.z + movez,
         });
         body.current.position.x += movex;
+        body.current.position.y =position[1];
         body.current.position.z += movez;
         // body.current.position.y = position[1];
         socket.emit('delta', {

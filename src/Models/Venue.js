@@ -14,6 +14,7 @@ const Venue = () => {
 
                 scale={3} />
             <ThreatreScreen />
+            
         </Suspense>
     )
 }

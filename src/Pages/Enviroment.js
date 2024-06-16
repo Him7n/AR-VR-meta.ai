@@ -20,6 +20,7 @@ import MenuClass from '../Component/MenuClass.js';
 import SelectiveRenderClass from '../Component/SelectiveRenderClass.js';
 import ConnectMetamask from './ConnectMetamask.js';
 import AskaiInput from '../Component/AskaiInput.js';
+import UpMenu from '../Component/UpMenu.js';
 const Enviroment = () => {
     const response = Authorize();
     if (response != null) {
@@ -47,6 +48,7 @@ const Enviroment = () => {
                 <Doubt />
                 <SelectiveRender />
                 <SelectiveRenderClass />
+                <UpMenu/>
                 <AskaiInput/>
                 <Sidebar />
                 <Products />

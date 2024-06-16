@@ -4,9 +4,10 @@ import { useAtom } from 'jotai';
 import OfficeIframe from './OfficeIframe'; import axios from "axios";
 import { socket, charactersAtom } from '../Socketmanager'
 import { _checkPlugin } from 'gsap/gsap-core';
-import SchoolIframe from './SchoolIframe';
+import Venue from '../Models/Venue';
+import VenueIframe from './VenueIframe';
 
-const FileSchool = () => {
+const VenueFile = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [url, seturl] = useState("https://invidious.io/");
     const [message, setmessage] = useState(null)
@@ -64,13 +65,13 @@ const FileSchool = () => {
     return (
         <>
             <Html occlude={"blending"} transform
-                scale={0.15} rotation-y={(Math.PI)*3/5}
-                position={[65, 2.5, -2]
+                scale={1.15} rotation-y={-Math.PI / 6}
+                position={[62.5, 7, -163]
 
                 }
 
                 zIndexRange={[10, 3]} >
-                <div className='w-auto py-4 h-auto font-sans text-[10px] border-gray-800 border-[1px] px-6  gap-4 text-center flex flex-col bg-cyan-400/45 backdrop-blur-sm    '>
+                <div className='w-auto py-4 h-[32vh] font-sans text-[10px] border-gray-800 border-[1px] px-6  gap-4 text-center flex flex-col bg-cyan-400/45 backdrop-blur-sm    '>
                     <label htmlFor="path" className='text-pretty text-slate-700 -mb-3 text-[20px]'  >Enter the path to pdf</label>
                     <input type="text" id='path' className='h-4 text-[14px] border-[3px] border-black/30 p-3' name='upload' onChange={handleFileChange} />
                     <button className=' bg-blue-500 text-white px-2 py-1 hover:bg-white hover:text-gray-700 border-[1px] 
@@ -81,11 +82,10 @@ const FileSchool = () => {
             </Html >
             {/* <OfficeIframe url={""} /> */}
             {!show && loading}
-            {/* {<OfficeIframe url={url} />} */}
-            {<SchoolIframe url={url} />}
+            {<VenueIframe url={url} />}
             {/* <OfficeIframe url={url} /> */}
         </>
     )
 }
 
-export default FileSchool
+export default VenueFile
